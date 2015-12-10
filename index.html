@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+	<meta charset="UTF-8">
+	<title>华天国旅同业系统|华天国际旅行社</title>
+	<script src="jquery-1.11.0.min.js"></script>
+	<script src="common.js"></script>
+	<link rel="stylesheet" href="common.css">
+	<style>
+		body {
+			margin:0;
+			padding:0;
+			font-size:12px;
+		}
+		img {
+			display:block;
+		}
+		a{
+			text-decoration:none;
+			color:#2965b1;
+		}
+		a:focus {
+			outline: thin dotted;
+
+		a:hover{
+			color:#FF6600;
+			text-decoration:underline;
+		}
+
+
+		#main-panel {
+			background: url(images/bg_index.jpg) 50% 50% no-repeat;
+			background-size: cover;
+			width:100%;
+			height:100%;
+		}
+		#logo-panel {
+			width: 572px;
+			height:388px;
+			background-image: url(images/logo_index.png);
+			margin:0 auto;
+		}
+
+		#login-panel {
+			color:#FFF;
+			margin:0 auto;
+			font: 30px/52px "Microsoft Yahei",Arial;
+			text-align: center;
+		}
+
+		#login-panel input {
+			font: 22px/1.5 "Microsoft Yahei",Arial;
+			height: 32px;
+			width: 478px;
+			color: #000;
+			padding: 10px;
+			border: 1px solid #CCCCCC;
+			border-radius: 3px 3px 3px 3px;
+			box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+		}
+
+		#login-panel button {
+			width: 130px;
+			height: 55px;
+			line-height: 55px;
+			box-shadow: 0 1px 1px #333333;
+			border-radius: 2px;
+			text-align: center;
+			color: #FFF;
+			font: 22px/1.5 "Microsoft Yahei",Arial;
+			text-shadow: 0 1px 2px #333;
+			letter-spacing: 8px;
+			background-color: #79A421;
+			cursor:pointer;
+		}
+		#login-panel button:hover {
+			background-color: #5b8021;
+		}
+	</style>
+	<!--[if IE 6]>
+	<script src="DD_belatedPNG_0.0.8a-min.js"></script>
+	<script>
+		DD_belatedPNG.fix('img');
+	</script>
+	<![endif]-->
+
+	<script>
+		function addFavorite(){
+			try {
+				window.external.addFavorite(sURL, sTitle);
+			} catch (e) {
+				try {
+					window.sidebar.addPanel(sTitle, sURL, "");
+				} catch (e) {
+					alert("您的浏览器不支持，请使用快捷键‘Ctrl+D’进行收藏！");
+				}
+			}
+		}
+
+		function doSubmit(){
+			if ( $('#password').val()=='' ){
+				alert('请输入密码后重新登陆！');
+			}else {
+				$.getJSON('http://www.htyou.com/user/user_login.action?jsoncallback=?&code=caoxi&userPassword=' + $('#password').val() + '&codeType=account&url=www.htyou.com&backurl=tongye.html', function (result) {
+					if ( result.message=='' ){
+						//登陆成功的处理
+						var banBackurl = checkban(result.backurl)
+						if (banBackurl==''){
+							window.location.href = result.backurl;
+						}else{
+							window.location.href = banBackurl;
+						}
+					}else{
+						//登陆失败的处理
+						$('#checkcode').val('');
+						alert(result.message);
+					}
+				});
+			}
+		}
+	</script>
+</head>
+<body>
+	<!--主内容面板-->
+	<div id="main-panel">
+		<img id="logo-panel" src="images/logo_index.png" alt="华天国际旅行社">
+		<div id="login-panel">
+			<span class="label-text">请输入密码：</span>
+			<input id="password" type="text" placeholder="请输入访问密码">
+			<button onclick="doSubmit()">登录</button>
+		</div>
+	</div>
+	<!--/主内容面板-->
+	<!--页脚-->
+	<style>
+		#footer {
+			width: 100%;
+			height:57px;
+			border-top:2px solid #2588A3;
+			background-color:#FFF;
+			position: fixed;
+			bottom:0;
+			left:0;
+			text-align: center;
+			font:14px/57px "Microsoft Yahei",Arial;
+			color:#7F7F7F;
+		}
+		#footer span {
+			font:18px/57px "Microsoft Yahei",Arial;
+			padding:0 3em;
+			vertical-align: middle;
+			cursor:pointer;
+			position:absolute;
+			left:0;
+			top:0;
+		}
+	</style>
+	<div id="footer">
+			<span onclick="javascript:addFavorite();">加入收藏</span>
+			华天国旅同业系统客服电话：<a href="tel:">xxxx-xxxxxxxx</a> 湖南华天国际旅行社 &copy;版权所有
+	</div>
+	<!--/页脚-->
+	<script>
+		function resizeMain(){
+			$('#main-panel').width($(window).innerWidth());
+			$('#main-panel').height($(window).innerHeight());
+		}
+		$(window).resize(function(){
+			resizeMain();
+		});
+		$(document).ready(function(){
+			resizeMain();
+		});
+	</script>
+</body>
+</html>

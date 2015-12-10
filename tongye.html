@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="zh_CN">
+<head>
+	<meta charset="UTF-8">
+	<title>华天国旅同业系统|华天国际旅行社</title>
+	<script src="jquery-1.11.0.min.js"></script>
+	<script src="common.js"></script>
+	<link rel="stylesheet" href="common.css">
+	<style>
+		body {
+			padding:0;
+			margin:0;
+			background-color: #FFFFFF;
+			color:#404040;
+			font:12px/1.5 "Microsoft YaHei",Arial;
+		}
+		img {
+			display: block;
+		}
+		a {
+			text-decoration: none;
+		}
+		ul,li {
+			padding:0;
+			margin:0;
+			list-style-type: none;
+		}
+		.clear {
+			clear: both;
+		}
+		.ty-width {
+			width:980px;
+			margin:0 auto;
+		}
+
+		#top-info-panel {
+			height:30px;
+			line-height: 30px;
+		}
+
+		#navsection {
+			width:100%;
+			background:url(http://www.op166.com/images/menu-repeat.gif);
+		}
+
+		#nav-panel {
+			height:57px;
+			position:relative;
+		}
+
+		#nav-panel .nav-unit {
+			height:54px;
+			border-top:3px solid #2689a5;
+			/*display:inline;*/
+			float:left;
+			padding:0 1em;
+			font-size:16px;
+			line-height: 54px;
+		}
+
+		#nav-panel .nav-unit:hover {
+			border-top:3px solid #2ac7e5;
+			background-color:#FFF;
+			cursor:pointer;
+		}
+
+	</style>
+</head>
+<body>
+<!--顶部信息栏-->
+<div id="top-info-panel" class="ty-width">
+	您的全球旅游顾问,华天国旅欢迎您!
+</div>
+<!--/顶部信息栏-->
+<!--顶部菜单-->
+<div id="navsection">
+	<div id="nav-panel" class="ty-width">
+		<ul>
+			<li class="nav-unit">泰国</li>
+			<li class="nav-unit">韩国</li>
+			<li class="nav-unit">日本</li>
+			<li class="nav-unit">缅甸</li>
+			<li class="nav-unit">加拿大</li>
+			<li class="nav-unit">美国</li>
+			<li class="nav-unit">新加坡</li>
+			<li class="nav-unit">德国</li>
+			<li class="nav-unit">法国</li>
+		</ul>
+		<!--菜单数据区-->
+		<style>
+			.data-panel {
+				position: absolute;
+				z-index:2;
+				width:400px;
+				padding:2em 1em;
+				height:auto;
+				border:1px solid #DFDFDF;
+				background-color:#FFF;
+				box-shadow:5px 5px 15px #999;
+				display:none;
+				border-radius: 5px;
+			}
+			.data-panel a {
+				display: block;
+				font:14px/2 'Microsoft YaHei', Arial;
+				color:#555;
+			}
+			.data-panel a:hover {
+				color:#330;
+				background-color: #CCCCCC;
+			}
+			.data-panel .up-arrow {
+				width:15px;
+				height:15px;
+				z-index:3;
+				position:absolute;
+				top:-14px;
+				left:1.5em;
+			}
+
+		</style>
+		<div class="data-panel">
+			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
+			<a href="">1千姿百*泰特惠-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞5日游</a>
+			<a href="">千姿百泰-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+			<a href="">千姿百*泰-动感篇7日游</a>
+			<a href="">千姿百泰-动感升级篇7日游</a>
+			<a href="">享时光-普吉一地6日游12.15</a>
+			<a href="">千姿百*泰-动感升级篇7日游</a>
+			<a href="">千姿百泰-乐享篇（12月31日）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+		</div>
+		<div class="data-panel">
+			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
+			<a href="">2千姿百*泰特惠-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞5日游</a>
+			<a href="">千姿百泰-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+			<a href="">千姿百*泰-动感篇7日游</a>
+			<a href="">千姿百泰-动感升级篇7日游</a>
+			<a href="">享时光-普吉一地6日游12.15</a>
+			<a href="">千姿百*泰-动感升级篇7日游</a>
+			<a href="">千姿百泰-乐享篇（12月31日）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+		</div>
+		<div class="data-panel">
+			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
+			<a href="">3千姿百*泰特惠-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞5日游</a>
+			<a href="">千姿百泰-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+			<a href="">千姿百*泰-动感篇7日游</a>
+			<a href="">千姿百泰-动感升级篇7日游</a>
+			<a href="">享时光-普吉一地6日游12.15</a>
+			<a href="">千姿百*泰-动感升级篇7日游</a>
+			<a href="">千姿百泰-乐享篇（12月31日）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+		</div>
+		<div class="data-panel">
+			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
+			<a href="">4千姿百*泰特惠-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞5日游</a>
+			<a href="">千姿百泰-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+			<a href="">千姿百*泰-动感篇7日游</a>
+			<a href="">千姿百泰-动感升级篇7日游</a>
+			<a href="">享时光-普吉一地6日游12.15</a>
+			<a href="">千姿百*泰-动感升级篇7日游</a>
+			<a href="">千姿百泰-乐享篇（12月31日）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+		</div>
+		<div class="data-panel">
+			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
+			<a href="">5千姿百*泰特惠-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞5日游</a>
+			<a href="">千姿百泰-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+			<a href="">千姿百*泰-动感篇7日游</a>
+			<a href="">千姿百泰-动感升级篇7日游</a>
+			<a href="">享时光-普吉一地6日游12.15</a>
+			<a href="">千姿百*泰-动感升级篇7日游</a>
+			<a href="">千姿百泰-乐享篇（12月31日）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+		</div>
+		<div class="data-panel">
+			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
+			<a href="">6千姿百*泰特惠-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞5日游</a>
+			<a href="">千姿百泰-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+			<a href="">千姿百*泰-动感篇7日游</a>
+			<a href="">千姿百泰-动感升级篇7日游</a>
+			<a href="">享时光-普吉一地6日游12.15</a>
+			<a href="">千姿百*泰-动感升级篇7日游</a>
+			<a href="">千姿百泰-乐享篇（12月31日）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+		</div>
+		<div class="data-panel">
+			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
+			<a href="">7千姿百*泰特惠-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞5日游</a>
+			<a href="">千姿百泰-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+			<a href="">千姿百*泰-动感篇7日游</a>
+			<a href="">千姿百泰-动感升级篇7日游</a>
+			<a href="">享时光-普吉一地6日游12.15</a>
+			<a href="">千姿百*泰-动感升级篇7日游</a>
+			<a href="">千姿百泰-乐享篇（12月31日）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+		</div>
+		<div class="data-panel">
+			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
+			<a href="">8千姿百*泰特惠-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞5日游</a>
+			<a href="">千姿百泰-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+			<a href="">千姿百*泰-动感篇7日游</a>
+			<a href="">千姿百泰-动感升级篇7日游</a>
+			<a href="">享时光-普吉一地6日游12.15</a>
+			<a href="">千姿百*泰-动感升级篇7日游</a>
+			<a href="">千姿百泰-乐享篇（12月31日）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+		</div>
+		<div class="data-panel">
+			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
+			<a href="">9千姿百*泰特惠-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞5日游</a>
+			<a href="">千姿百泰-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+			<a href="">千姿百*泰-动感篇7日游</a>
+			<a href="">千姿百泰-动感升级篇7日游</a>
+			<a href="">享时光-普吉一地6日游12.15</a>
+			<a href="">千姿百*泰-动感升级篇7日游</a>
+			<a href="">千姿百泰-乐享篇（12月31日）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+		</div>
+		<div class="data-panel">
+			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
+			<a href="">10千姿百*泰特惠-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞5日游</a>
+			<a href="">千姿百泰-动感篇7日游</a>
+			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+			<a href="">千姿百*泰-动感篇7日游</a>
+			<a href="">千姿百泰-动感升级篇7日游</a>
+			<a href="">享时光-普吉一地6日游12.15</a>
+			<a href="">千姿百*泰-动感升级篇7日游</a>
+			<a href="">千姿百泰-乐享篇（12月31日）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+		</div>
+		<!--/菜单数据区-->
+	</div>
+</div>
+<!--/顶部菜单-->
+<!--顶部Banner-->
+<!--上部可滚动Gallery-->
+<!--产品列表-->
+<!--侧边栏-->
+<!--公共Footer-->
+
+<script>
+	$(document).ready(function(){
+		var onNavUnit   = false;
+		var onDataPanel = false;
+
+		$('#nav-panel').delegate('.nav-unit','mouseover',function(){
+			$('.data-panel').hide();
+			var panelLeft   = $(this).position().left;
+			var panelTop    = $(this).position().top+$(this).height();
+			$(this).css({'z-index':'9'});
+			$('.data-panel:eq('+$(this).index()+')').css({/*'opacity':'10', */'left':panelLeft,'top':panelTop+10}).show().animate({/*'opacity':'10',*//*'left':panelLeft,*/'top':panelTop},200);
+			onNavUnit   = true;
+		}).delegate('.nav-unit','mouseout', function(){
+			onNavUnit   = false;
+			doDatapanelClose();
+		});
+		$('#nav-panel').delegate('.data-panel','mouseover',function(){
+			onDataPanel = true;
+		}).delegate('.data-panel','mouseout',function(){
+			onDataPanel = false;
+			doDatapanelClose();
+		});
+		function doDatapanelClose(){
+			console.log(onNavUnit, onDataPanel);
+			window.setTimeout(function(){
+				if (!onNavUnit&&!onDataPanel){
+					$('.data-panel').hide();
+				}
+			},3000);
+		}
+	});
+</script>
+</body>
+</html>
