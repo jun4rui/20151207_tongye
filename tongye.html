@@ -279,7 +279,7 @@
 			var panelLeft   = $(this).position().left;
 			var panelTop    = $(this).position().top+$(this).height();
 			$(this).css({'z-index':'9'});
-			$('.data-panel:eq('+$(this).index()+')').css({/*'opacity':'10', */'left':panelLeft,'top':panelTop+10}).show().animate({/*'opacity':'10',*//*'left':panelLeft,*/'top':panelTop},200);
+			$('.data-panel:eq('+$(this).index()+')').css({/*'opacity':'10', */'left':panelLeft,'top':panelTop}).show()/*.animate({/!*'opacity':'10',*!//!*'left':panelLeft,*!/'top':panelTop},200)*/;
 			onNavUnit   = true;
 		}).delegate('.nav-unit','mouseout', function(){
 			onNavUnit   = false;
