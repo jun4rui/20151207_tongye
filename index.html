@@ -21,6 +21,7 @@
 		}
 		a:focus {
 			outline: thin dotted;
+		}
 
 		a:hover{
 			color:#FF6600;
@@ -101,6 +102,7 @@
 			if ( $('#password').val()=='' ){
 				alert('请输入密码后重新登陆！');
 			}else {
+				//console.log('http://www.htyou.com/user/user_login.action?jsoncallback=?&code=caoxi&userPassword=' + $('#password').val() + '&codeType=account&url=www.htyou.com&backurl=tongye.html');
 				$.getJSON('http://www.htyou.com/user/user_login.action?jsoncallback=?&code=caoxi&userPassword=' + $('#password').val() + '&codeType=account&url=www.htyou.com&backurl=tongye.html', function (result) {
 					if ( result.message=='' ){
 						//登陆成功的处理
