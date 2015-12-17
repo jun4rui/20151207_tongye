@@ -1,305 +1,594 @@
 <!DOCTYPE html>
 <html lang="zh_CN">
 <head>
-	<meta charset="UTF-8">
-	<title>华天国旅同业系统|华天国际旅行社</title>
-	<script src="jquery-1.11.0.min.js"></script>
-	<script src="common.js"></script>
-	<link rel="stylesheet" href="common.css">
-	<style>
-		body {
-			padding:0;
-			margin:0;
-			background-color: #FFFFFF;
-			color:#404040;
-			font:12px/1.5 "Microsoft YaHei",Arial;
-		}
-		img {
-			display: block;
-		}
-		a {
-			text-decoration: none;
-		}
-		ul,li {
-			padding:0;
-			margin:0;
-			list-style-type: none;
-		}
-		.clear {
-			clear: both;
-		}
-		.ty-width {
-			width:980px;
-			margin:0 auto;
-		}
+    <meta charset="UTF-8">
+    <title>华天国旅同业系统|华天国际旅行社</title>
+    <script src="jquery-1.11.0.min.js"></script>
+    <script src="avalon.js"></script>
+    <script src="common.js"></script>
+    <link rel="stylesheet" href="common.css">
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+            background-color: #FFFFFF;
+            color: #404040;
+            font: 12px/1.5 "Microsoft YaHei", Arial;
+        }
 
-		#top-info-panel {
-			height:30px;
-			line-height: 30px;
-		}
+        img {
+            display: block;
+        }
 
-		#navsection {
-			width:100%;
-			background:url(http://www.op166.com/images/menu-repeat.gif);
-		}
+        a {
+            text-decoration: none;
+        }
 
-		#nav-panel {
-			height:57px;
-			position:relative;
-		}
+        ul, li {
+            padding: 0;
+            margin: 0;
+            list-style-type: none;
+        }
 
-		#nav-panel .nav-unit {
-			height:54px;
-			border-top:3px solid #2689a5;
-			/*display:inline;*/
-			float:left;
-			padding:0 1em;
-			font-size:16px;
-			line-height: 54px;
-		}
+        .clear {
+            clear: both;
+        }
 
-		#nav-panel .nav-unit:hover {
-			border-top:3px solid #2ac7e5;
-			background-color:#FFF;
-			cursor:pointer;
-		}
+        .ty-width {
+            width: 1000px;
+            margin: 0 auto;
+        }
 
-	</style>
+        #top-info-panel {
+            height: 30px;
+            line-height: 45px;
+        }
+
+        #navsection {
+            width: 100%;
+            background: url(http://www.op166.com/images/menu-repeat.gif);
+        }
+
+        #nav-panel {
+            height: 57px;
+            position: relative;
+        }
+
+        #nav-panel .nav-unit,
+        #nav-panel .nav-link {
+            height: 54px;
+            border-top: 3px solid #2689a5;
+            /*display:inline;*/
+            float: left;
+            padding: 0 1em;
+            font-size: 16px;
+            line-height: 54px;
+            cursor: pointer;
+        }
+
+        .nav-link a {
+            color: #404040;
+        }
+
+        #nav-panel .nav-unit:hover,
+        #nav-panel .nav-link:hover {
+            border-top: 3px solid #2ac7e5;
+            background-color: #FFF;
+        }
+
+    </style>
+    <script>
+        avalon.ready(function () {
+            //全局VM
+            var navVM = avalon.define({
+                $id: 'nav',
+                list: []
+            });
+
+            var dataVM = avalon.define({
+                $id: 'data',
+                list: []
+            });
+
+            avalon.scan();
+
+            $.getJSON('http://www.htyou.com/common/websinfo_queryHTClass.action?datatype=json&classId=728&jsoncallback=?', function (result) {
+                navVM.list = result[0].notes.split(' ');
+                //console.log(result, list);
+            }).done(function () {
+                //console.log('done');
+                for (var i = 0; i < navVM.list.length; i++) {
+                    var index   = i;
+                    var name    = navVM.list[i];
+
+                    $.getJSON('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + encodeURI(navVM.list[i]), function (result) {
+                        if (result.value != null) {
+                            dataVM.list.push(result);
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </head>
 <body>
 <!--顶部信息栏-->
 <div id="top-info-panel" class="ty-width">
-	您的全球旅游顾问,华天国旅欢迎您!
+    您的全球旅游顾问,华天国旅欢迎您!
 </div>
 <!--/顶部信息栏-->
+<div ms-controller="data">
+    <li ms-repeat-unit="list">
+        <h2>{{list.index}}</h2>
+        <a href="#" ms-repeat-sunit="unit.value">{{sunit[0]}}</a>
+    </li>
+</div>
 <!--顶部菜单-->
-<div id="navsection">
-	<div id="nav-panel" class="ty-width">
-		<ul>
-			<li class="nav-unit">泰国</li>
-			<li class="nav-unit">韩国</li>
-			<li class="nav-unit">日本</li>
-			<li class="nav-unit">缅甸</li>
-			<li class="nav-unit">加拿大</li>
-			<li class="nav-unit">美国</li>
-			<li class="nav-unit">新加坡</li>
-			<li class="nav-unit">德国</li>
-			<li class="nav-unit">法国</li>
-		</ul>
-		<!--菜单数据区-->
-		<style>
-			.data-panel {
-				position: absolute;
-				z-index:2;
-				width:400px;
-				padding:2em 1em;
-				height:auto;
-				border:1px solid #DFDFDF;
-				background-color:#FFF;
-				box-shadow:5px 5px 15px #999;
-				display:none;
-				border-radius: 5px;
-			}
-			.data-panel a {
-				display: block;
-				font:14px/2 'Microsoft YaHei', Arial;
-				color:#555;
-			}
-			.data-panel a:hover {
-				color:#330;
-				background-color: #CCCCCC;
-			}
-			.data-panel .up-arrow {
-				width:15px;
-				height:15px;
-				z-index:3;
-				position:absolute;
-				top:-14px;
-				left:1.5em;
-			}
+<div id="navsection" ms-controller="data">
+    <div id="nav-panel" class="ty-width">
+        <ul ms-controller="nav">
+            <li class="nav-link"><a href="#">首页</a></li>
+            <li class="nav-unit" ms-repeat-unit="list">{{unit}}</li>
+            <li class="nav-link"><a href="#">关于我们</a></li>
+        </ul>
+        <!--菜单数据区-->
+        <style>
+            .data-panel {
+                position: absolute;
+                z-index: 2;
+                width: 400px;
+                padding: 2em 1em;
+                height: auto;
+                border: 1px solid #DFDFDF;
+                background-color: #FFF;
+                box-shadow: 5px 5px 15px #999;
+                display: none;
+                border-radius: 5px;
+            }
 
-		</style>
-		<div class="data-panel">
-			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
-			<a href="">1千姿百*泰特惠-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞5日游</a>
-			<a href="">千姿百泰-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-			<a href="">千姿百*泰-动感篇7日游</a>
-			<a href="">千姿百泰-动感升级篇7日游</a>
-			<a href="">享时光-普吉一地6日游12.15</a>
-			<a href="">千姿百*泰-动感升级篇7日游</a>
-			<a href="">千姿百泰-乐享篇（12月31日）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-		</div>
-		<div class="data-panel">
-			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
-			<a href="">2千姿百*泰特惠-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞5日游</a>
-			<a href="">千姿百泰-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-			<a href="">千姿百*泰-动感篇7日游</a>
-			<a href="">千姿百泰-动感升级篇7日游</a>
-			<a href="">享时光-普吉一地6日游12.15</a>
-			<a href="">千姿百*泰-动感升级篇7日游</a>
-			<a href="">千姿百泰-乐享篇（12月31日）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-		</div>
-		<div class="data-panel">
-			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
-			<a href="">3千姿百*泰特惠-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞5日游</a>
-			<a href="">千姿百泰-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-			<a href="">千姿百*泰-动感篇7日游</a>
-			<a href="">千姿百泰-动感升级篇7日游</a>
-			<a href="">享时光-普吉一地6日游12.15</a>
-			<a href="">千姿百*泰-动感升级篇7日游</a>
-			<a href="">千姿百泰-乐享篇（12月31日）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-		</div>
-		<div class="data-panel">
-			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
-			<a href="">4千姿百*泰特惠-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞5日游</a>
-			<a href="">千姿百泰-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-			<a href="">千姿百*泰-动感篇7日游</a>
-			<a href="">千姿百泰-动感升级篇7日游</a>
-			<a href="">享时光-普吉一地6日游12.15</a>
-			<a href="">千姿百*泰-动感升级篇7日游</a>
-			<a href="">千姿百泰-乐享篇（12月31日）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-		</div>
-		<div class="data-panel">
-			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
-			<a href="">5千姿百*泰特惠-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞5日游</a>
-			<a href="">千姿百泰-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-			<a href="">千姿百*泰-动感篇7日游</a>
-			<a href="">千姿百泰-动感升级篇7日游</a>
-			<a href="">享时光-普吉一地6日游12.15</a>
-			<a href="">千姿百*泰-动感升级篇7日游</a>
-			<a href="">千姿百泰-乐享篇（12月31日）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-		</div>
-		<div class="data-panel">
-			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
-			<a href="">6千姿百*泰特惠-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞5日游</a>
-			<a href="">千姿百泰-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-			<a href="">千姿百*泰-动感篇7日游</a>
-			<a href="">千姿百泰-动感升级篇7日游</a>
-			<a href="">享时光-普吉一地6日游12.15</a>
-			<a href="">千姿百*泰-动感升级篇7日游</a>
-			<a href="">千姿百泰-乐享篇（12月31日）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-		</div>
-		<div class="data-panel">
-			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
-			<a href="">7千姿百*泰特惠-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞5日游</a>
-			<a href="">千姿百泰-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-			<a href="">千姿百*泰-动感篇7日游</a>
-			<a href="">千姿百泰-动感升级篇7日游</a>
-			<a href="">享时光-普吉一地6日游12.15</a>
-			<a href="">千姿百*泰-动感升级篇7日游</a>
-			<a href="">千姿百泰-乐享篇（12月31日）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-		</div>
-		<div class="data-panel">
-			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
-			<a href="">8千姿百*泰特惠-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞5日游</a>
-			<a href="">千姿百泰-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-			<a href="">千姿百*泰-动感篇7日游</a>
-			<a href="">千姿百泰-动感升级篇7日游</a>
-			<a href="">享时光-普吉一地6日游12.15</a>
-			<a href="">千姿百*泰-动感升级篇7日游</a>
-			<a href="">千姿百泰-乐享篇（12月31日）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-		</div>
-		<div class="data-panel">
-			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
-			<a href="">9千姿百*泰特惠-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞5日游</a>
-			<a href="">千姿百泰-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-			<a href="">千姿百*泰-动感篇7日游</a>
-			<a href="">千姿百泰-动感升级篇7日游</a>
-			<a href="">享时光-普吉一地6日游12.15</a>
-			<a href="">千姿百*泰-动感升级篇7日游</a>
-			<a href="">千姿百泰-乐享篇（12月31日）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-		</div>
-		<div class="data-panel">
-			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
-			<a href="">10千姿百*泰特惠-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞5日游</a>
-			<a href="">千姿百泰-动感篇7日游</a>
-			<a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-			<a href="">千姿百*泰-动感篇7日游</a>
-			<a href="">千姿百泰-动感升级篇7日游</a>
-			<a href="">享时光-普吉一地6日游12.15</a>
-			<a href="">千姿百*泰-动感升级篇7日游</a>
-			<a href="">千姿百泰-乐享篇（12月31日）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-			<a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-		</div>
-		<!--/菜单数据区-->
-	</div>
+            .data-panel a {
+                display: block;
+                font: 14px/2 'Microsoft YaHei', Arial;
+                color: #555;
+            }
+
+            .data-panel a:hover {
+                color: #330;
+                background-color: #CCCCCC;
+            }
+
+            .data-panel .up-arrow {
+                width: 15px;
+                height: 15px;
+                z-index: 3;
+                position: absolute;
+                top: -14px;
+                left: 1.5em;
+            }
+
+        </style>
+        <div class="data-panel" ms-repeat="list" ms-attr-keyword="{{el.value2.KeyWords}}">
+            <img src="images/icon_arrow.gif" alt="" class="up-arrow">
+            <a ms-attr-href="{{elem.lineid}}" ms-repeat-elem="el.value">{{elem.tourproname}}</a>
+        </div>
+        <!--		<div class="data-panel">
+                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
+                    <a href="">1千姿百*泰特惠-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
+                    <a href="">千姿百泰-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+                    <a href="">千姿百*泰-动感篇7日游</a>
+                    <a href="">千姿百泰-动感升级篇7日游</a>
+                    <a href="">享时光-普吉一地6日游12.15</a>
+                    <a href="">千姿百*泰-动感升级篇7日游</a>
+                    <a href="">千姿百泰-乐享篇（12月31日）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                </div>
+                <div class="data-panel">
+                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
+                    <a href="">2千姿百*泰特惠-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
+                    <a href="">千姿百泰-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+                    <a href="">千姿百*泰-动感篇7日游</a>
+                    <a href="">千姿百泰-动感升级篇7日游</a>
+                    <a href="">享时光-普吉一地6日游12.15</a>
+                    <a href="">千姿百*泰-动感升级篇7日游</a>
+                    <a href="">千姿百泰-乐享篇（12月31日）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                </div>
+                <div class="data-panel">
+                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
+                    <a href="">3千姿百*泰特惠-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
+                    <a href="">千姿百泰-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+                    <a href="">千姿百*泰-动感篇7日游</a>
+                    <a href="">千姿百泰-动感升级篇7日游</a>
+                    <a href="">享时光-普吉一地6日游12.15</a>
+                    <a href="">千姿百*泰-动感升级篇7日游</a>
+                    <a href="">千姿百泰-乐享篇（12月31日）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                </div>
+                <div class="data-panel">
+                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
+                    <a href="">4千姿百*泰特惠-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
+                    <a href="">千姿百泰-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+                    <a href="">千姿百*泰-动感篇7日游</a>
+                    <a href="">千姿百泰-动感升级篇7日游</a>
+                    <a href="">享时光-普吉一地6日游12.15</a>
+                    <a href="">千姿百*泰-动感升级篇7日游</a>
+                    <a href="">千姿百泰-乐享篇（12月31日）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                </div>
+                <div class="data-panel">
+                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
+                    <a href="">5千姿百*泰特惠-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
+                    <a href="">千姿百泰-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+                    <a href="">千姿百*泰-动感篇7日游</a>
+                    <a href="">千姿百泰-动感升级篇7日游</a>
+                    <a href="">享时光-普吉一地6日游12.15</a>
+                    <a href="">千姿百*泰-动感升级篇7日游</a>
+                    <a href="">千姿百泰-乐享篇（12月31日）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                </div>
+                <div class="data-panel">
+                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
+                    <a href="">6千姿百*泰特惠-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
+                    <a href="">千姿百泰-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+                    <a href="">千姿百*泰-动感篇7日游</a>
+                    <a href="">千姿百泰-动感升级篇7日游</a>
+                    <a href="">享时光-普吉一地6日游12.15</a>
+                    <a href="">千姿百*泰-动感升级篇7日游</a>
+                    <a href="">千姿百泰-乐享篇（12月31日）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                </div>
+                <div class="data-panel">
+                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
+                    <a href="">7千姿百*泰特惠-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
+                    <a href="">千姿百泰-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+                    <a href="">千姿百*泰-动感篇7日游</a>
+                    <a href="">千姿百泰-动感升级篇7日游</a>
+                    <a href="">享时光-普吉一地6日游12.15</a>
+                    <a href="">千姿百*泰-动感升级篇7日游</a>
+                    <a href="">千姿百泰-乐享篇（12月31日）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                </div>
+                <div class="data-panel">
+                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
+                    <a href="">8千姿百*泰特惠-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
+                    <a href="">千姿百泰-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+                    <a href="">千姿百*泰-动感篇7日游</a>
+                    <a href="">千姿百泰-动感升级篇7日游</a>
+                    <a href="">享时光-普吉一地6日游12.15</a>
+                    <a href="">千姿百*泰-动感升级篇7日游</a>
+                    <a href="">千姿百泰-乐享篇（12月31日）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                </div>
+                <div class="data-panel">
+                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
+                    <a href="">9千姿百*泰特惠-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
+                    <a href="">千姿百泰-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+                    <a href="">千姿百*泰-动感篇7日游</a>
+                    <a href="">千姿百泰-动感升级篇7日游</a>
+                    <a href="">享时光-普吉一地6日游12.15</a>
+                    <a href="">千姿百*泰-动感升级篇7日游</a>
+                    <a href="">千姿百泰-乐享篇（12月31日）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                </div>
+                <div class="data-panel">
+                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
+                    <a href="">10千姿百*泰特惠-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
+                    <a href="">千姿百泰-动感篇7日游</a>
+                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
+                    <a href="">千姿百*泰-动感篇7日游</a>
+                    <a href="">千姿百泰-动感升级篇7日游</a>
+                    <a href="">享时光-普吉一地6日游12.15</a>
+                    <a href="">千姿百*泰-动感升级篇7日游</a>
+                    <a href="">千姿百泰-乐享篇（12月31日）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
+                </div>-->
+        <!--/菜单数据区-->
+    </div>
 </div>
 <!--/顶部菜单-->
 <!--顶部Banner-->
+<style>
+    #top-banner-section {
+        width: 100%;
+        height: 190px;
+        border-bottom: 1px solid #CCC;
+        box-shadow: 0 1px 3px #CCC;
+    }
+
+    #top-banner-section > img {
+        margin: 0 auto;
+        width: 1000px;
+        height: 190px;
+    }
+</style>
+<div id="top-banner-section">
+    <img src="http://www.op166.com/_upload/image/125/20140324014445934593.jpg" alt="">
+</div>
+<!--/顶部Banner-->
 <!--上部可滚动Gallery-->
+<style>
+    #gallery {
+        margin: 10px auto 0 auto;
+        width: 1000px;
+        height: 378px;
+        position: relative;
+    }
+
+    #gallery .bigpic-panel {
+        width: 1000px;
+        height: 378px;
+    }
+
+    #gallery .bigpic-panel a img {
+        width: 1000px;
+        height: 378px;
+    }
+
+    #gallery .topic-panel {
+        position: absolute;
+        width: 1000px;
+        height: 20px;
+        bottom: 20px;
+        left: 0;
+        text-align: center;
+
+    }
+
+    .topic-panel .gallery-unit {
+        width: 12px;
+        height: 12px;
+        display: inline-block;
+        border: 1px solid #e5e5e5;
+        background-color: #FFF;
+        cursor: pointer;
+        margin: auto 2px;
+
+        *display: inline;
+        zoom: 1;
+    }
+
+    .topic-panel .gallery-unit.active {
+        border: 1px solid #e5e5e5;
+        background-color: #FF6600;
+    }
+</style>
+<div id="gallery">
+    <div class="bigpic-panel">
+        <a href="#">
+            <img src="http://www.htyou.com/pic/adpic/2015-12-02_15-31-45_0843.jpg" alt="">
+        </a>
+    </div>
+    <div class="topic-panel">
+        <div class="topic-unit gallery-unit active" pic="pic/adpic/2015-12-02_15-31-45_0843.jpg"
+             link="/tour/type/month/keyword台湾_包机.htm"></div>
+        <div class="topic-unit gallery-unit" pic="pic/adpic/2015-12-14_09-12-11_8486.jpg"
+             link="/tour/type/month/keyword长滩.htm"></div>
+        <div class="topic-unit gallery-unit" pic="pic/adpic/2015-11-26_09-25-35_9743.jpg"
+             link="/tour/tourbrowse/10603.htm"></div>
+        <div class="topic-unit gallery-unit" pic="pic/adpic/2015-11-09_16-37-14_1746.jpg"
+             link="/tour/tourbrowse/10466.htm"></div>
+        <div class="topic-unit gallery-unit" pic="pic/adpic/2015-05-05_10-11-08_2130.jpg"
+             link="/tour/type/month/keyword韩国.htm"></div>
+    </div>
+</div>
+<!--/上部可滚动Gallery-->
 <!--产品列表-->
+<style>
+    .product-list {
+        margin-top: 15px;
+    }
+
+    .product-list .title {
+        width: 100%;
+        height: 28px;
+        line-height: 28px;
+        border-left: 4px solid #54a1c1;
+        position: relative;
+        color: #555;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .product-list .title h2 {
+        color: #54a1c1;
+        display: inline;
+        padding: 0 10px;
+    }
+
+    .product-list .title span {
+        font-size: 16px;
+        line-height: 28px;
+    }
+
+    .product-list .title .morelink {
+        position: absolute;
+        right: 5px;
+        bottom: 3px;
+        color: #555;
+        line-height: 100%;
+    }
+
+    .product-list ul {
+        width: 1020px;
+    }
+
+    .product-list li {
+        width: 233px;
+        height: 174px;
+        /* padding: 5px; */
+        float: left;
+        margin-right: 20px;
+        margin-bottom: 15px;
+        /* border: 1px solid #E5E5E5; */
+        background-color: #F5F5F5;
+        overflow:hidden;
+    }
+
+    .product-list li img {
+        width: 233px;
+        height: 126px;
+        margin: 0 auto;
+    }
+
+    .product-list li a {
+        color: #555;
+        font-size: 16px;
+    }
+
+</style>
+
+<div ms-controller="data">
+<!--产品列表模块-->
+<div class="ty-width product-list" ms-repeat="list">
+    <div class="title">
+        <h2>{{el.value2.KeyWords}}</h2><span>产品列表</span>
+        <a href="#" class="morelink">查看更多</a>
+    </div>
+    <ul>
+        <li ms-repeat-elem="el.value">
+            <a ms-attr-href="{{elem.lineid}}" ms-attr-title="{{elem.tourproname}}">
+                <img ms-attr-src="http://www.htyou.com/{{elem.spotviewpic}}" ms-attr-alt="{{elem.tourproname}}">
+                {{elem.tourproname}}
+            </a>
+        </li>
+    </ul>
+    <div class="clear"></div>
+</div>
+<!--/产品列表模块-->
+</div>
+
+
 <!--侧边栏-->
 <!--公共Footer-->
+<style>
+    #footer {
+        padding: 20px 20px;
+        color: #e5e5e5;
+        text-align: center;
+        line-height: 220%;
+        font-family: 'Arial';
+        width: 100%;
+        margin: 0 auto;
+        display: block;
+        background-image: url(http://www.op166.com/images/footer-bg.gif);
+        border-top: 1px solid #e5e5e5;
+    }
+
+    #footer a {
+        color: #FF0;
+    }
+</style>
+<div id="footer">
+    Copyright © 2015 <a href="http://www.htyou.com" target="_blank" class="link-color">www.htyou.com</a>
+    湖南华天国际旅行社有限责任公司版权所有<br>
+    旅行社业务许可证编号：L-HUN-CJ00001 湘ICP备12003410号<br>
+    经营范围：国内旅游、入境旅游、出境旅游 法定代表人：孙根石<br>
+    湖南华天旅行社地址：长沙市芙蓉区解放东路300号 公司投诉电话：0731-84153558<br>
+    全省统一服务热线：<a href="tel:073155555555" class="link-color">0731–55555555</a> 湖南省旅游局投诉电话：0731-84717614<br>
+</div>
+<!--/公共Footer-->
+
 
 <script>
-	$(document).ready(function(){
-		var onNavUnit   = false;
-		var onDataPanel = false;
+    $(document).ready(function () {
+        var onNavUnit = false;
+        var onDataPanel = false;
 
-		$('#nav-panel').delegate('.nav-unit','mouseover',function(){
-			$('.data-panel').hide();
-			var panelLeft   = $(this).position().left;
-			var panelTop    = $(this).position().top+$(this).height();
-			$(this).css({'z-index':'9'});
-			$('.data-panel:eq('+$(this).index()+')').css({/*'opacity':'10', */'left':panelLeft,'top':panelTop}).show()/*.animate({/!*'opacity':'10',*!//!*'left':panelLeft,*!/'top':panelTop},200)*/;
-			onNavUnit   = true;
-		}).delegate('.nav-unit','mouseout', function(){
-			onNavUnit   = false;
-			doDatapanelClose();
-		});
-		$('#nav-panel').delegate('.data-panel','mouseover',function(){
-			onDataPanel = true;
-		}).delegate('.data-panel','mouseout',function(){
-			onDataPanel = false;
-			doDatapanelClose();
-		});
-		function doDatapanelClose(){
-			console.log(onNavUnit, onDataPanel);
-			window.setTimeout(function(){
-				if (!onNavUnit&&!onDataPanel){
-					$('.data-panel').hide();
-				}
-			},3000);
-		}
-	});
+        $('#nav-panel').delegate('.nav-unit', 'mouseover', function () {
+            $('.data-panel').hide();
+            var panelLeft = $(this).position().left;
+            var panelTop = $(this).position().top + $(this).height() - 5;
+            $(this).css({'z-index': '9'});
+            $('.data-panel:eq(' + $(this).index() + ')').css({
+                /*'opacity':'10', */
+                'left': panelLeft,
+                'top': panelTop
+            }).show()/*.animate({/!*'opacity':'10',*!//!*'left':panelLeft,*!/'top':panelTop},200)*/;
+            onNavUnit = true;
+        }).delegate('.nav-unit', 'mouseout', function () {
+            onNavUnit = false;
+            doDatapanelClose();
+        });
+        $('#nav-panel').delegate('.data-panel', 'mouseover', function () {
+            onDataPanel = true;
+        }).delegate('.data-panel', 'mouseout', function () {
+            onDataPanel = false;
+            doDatapanelClose();
+        });
+        function doDatapanelClose() {
+            console.log(onNavUnit, onDataPanel);
+            window.setTimeout(function () {
+                if (!onNavUnit && !onDataPanel) {
+                    $('.data-panel').hide();
+                }
+            }, 3000);
+        }
+
+        //Gallery点击切换函数
+        $('.topic-panel').delegate('.topic-unit', 'click', function () {
+            $('.bigpic-panel').html('<a href="http://www.htyou.com' + $(this).attr('link') + '" target="_blank"><img src="http://www.htyou.com/' + $(this).attr('pic') + '" alt=""/></a>');
+            $('.topic-unit.active').removeClass('active');
+            $(this).addClass('active');
+        });
+        //Gallery自动切换函数
+        window.setInterval(function () {
+            //取得当前是第几个
+            var galleryIndex = $('.topic-unit.active').index();
+            var galleryLength = $('.topic-unit').length - 1;
+            //console.log(galleryIndex, galleryLength);
+            if (galleryIndex < galleryLength) {
+                $('.topic-unit').eq(galleryIndex + 1).click();
+            } else {
+                $('.topic-unit').eq(0).click();
+            }
+        }, 3000);
+
+    });
+</script>
+
+<script>
+    function startLogin() {
+//    (new DialogBox).showIFrame("/LoginUI.aspx", "登录", 200, 300);
+        var url = "/LoginUI.aspx";                 //要访问的url
+        var selector = "#login";                    //jquery选择器
+        jQuery.post(url, null, function (data) {
+            changeContent(data, selector);
+        });
+    }
+    //回调函数
+    var changeContent = function (data, selector) {
+        var $content = jQuery(data).find(selector);
+        alert($content.html());
+    }
 </script>
 </body>
 </html>
