@@ -467,23 +467,23 @@
 </style>
 
 <div ms-controller="data">
-<!--产品列表模块-->
-<div class="ty-width product-list" ms-repeat="list">
-    <div class="title">
-        <h2>{{el.value2.KeyWords}}</h2><span>产品列表</span>
-        <a href="#" class="morelink">查看更多</a>
+    <!--产品列表模块-->
+    <div class="ty-width product-list" ms-repeat="list">
+        <div class="title">
+            <h2>{{el.value2.KeyWords}}</h2><span>产品列表</span>
+            <a href="#" class="morelink">查看更多</a>
+        </div>
+        <ul>
+            <li ms-repeat-elem="el.value">
+                <a ms-attr-href="{{elem.lineid}}" ms-attr-title="{{elem.tourproname}}">
+                    <img ms-attr-src="http://www.htyou.com/{{elem.spotviewpic}}" ms-attr-alt="{{elem.tourproname}}">
+                    {{elem.tourproname}}
+                </a>
+            </li>
+        </ul>
+        <div class="clear"></div>
     </div>
-    <ul>
-        <li ms-repeat-elem="el.value">
-            <a ms-attr-href="{{elem.lineid}}" ms-attr-title="{{elem.tourproname}}">
-                <img ms-attr-src="http://www.htyou.com/{{elem.spotviewpic}}" ms-attr-alt="{{elem.tourproname}}">
-                {{elem.tourproname}}
-            </a>
-        </li>
-    </ul>
-    <div class="clear"></div>
-</div>
-<!--/产品列表模块-->
+    <!--/产品列表模块-->
 </div>
 
 
@@ -573,6 +573,22 @@
         }, 3000);
 
     });
+</script>
+
+<script>
+    function startLogin() {
+//    (new DialogBox).showIFrame("/LoginUI.aspx", "登录", 200, 300);
+        var url = "/LoginUI.aspx";                 //要访问的url
+        var selector = "#login";                    //jquery选择器
+        jQuery.post(url, null, function (data) {
+            changeContent(data, selector);
+        });
+    }
+    //回调函数
+    var changeContent = function (data, selector) {
+        var $content = jQuery(data).find(selector);
+        alert($content.html());
+    }
 </script>
 </body>
 </html>
