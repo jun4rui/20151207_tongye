@@ -95,18 +95,6 @@
             $.getJSON('http://www.htyou.com/common/websinfo_queryHTClass.action?datatype=json&classId=728&jsoncallback=?', function (result) {
                 navVM.list = result[0].notes.split(' ');
                 //console.log(result, list);
-            }).done(function () {
-                //console.log('done');
-                for (var i = 0; i < navVM.list.length; i++) {
-                    var index   = i;
-                    var name    = navVM.list[i];
-
-                    $.getJSON('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + encodeURI(navVM.list[i]), function (result) {
-                        if (result.value != null) {
-                            dataVM.list.push(result);
-                        }
-                    });
-                }
             });
         });
     </script>
@@ -171,146 +159,6 @@
             <img src="images/icon_arrow.gif" alt="" class="up-arrow">
             <a ms-attr-href="{{elem.lineid}}" ms-repeat-elem="el.value">{{elem.tourproname}}</a>
         </div>
-        <!--		<div class="data-panel">
-                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
-                    <a href="">1千姿百*泰特惠-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
-                    <a href="">千姿百泰-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-                    <a href="">千姿百*泰-动感篇7日游</a>
-                    <a href="">千姿百泰-动感升级篇7日游</a>
-                    <a href="">享时光-普吉一地6日游12.15</a>
-                    <a href="">千姿百*泰-动感升级篇7日游</a>
-                    <a href="">千姿百泰-乐享篇（12月31日）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                </div>
-                <div class="data-panel">
-                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
-                    <a href="">2千姿百*泰特惠-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
-                    <a href="">千姿百泰-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-                    <a href="">千姿百*泰-动感篇7日游</a>
-                    <a href="">千姿百泰-动感升级篇7日游</a>
-                    <a href="">享时光-普吉一地6日游12.15</a>
-                    <a href="">千姿百*泰-动感升级篇7日游</a>
-                    <a href="">千姿百泰-乐享篇（12月31日）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                </div>
-                <div class="data-panel">
-                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
-                    <a href="">3千姿百*泰特惠-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
-                    <a href="">千姿百泰-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-                    <a href="">千姿百*泰-动感篇7日游</a>
-                    <a href="">千姿百泰-动感升级篇7日游</a>
-                    <a href="">享时光-普吉一地6日游12.15</a>
-                    <a href="">千姿百*泰-动感升级篇7日游</a>
-                    <a href="">千姿百泰-乐享篇（12月31日）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                </div>
-                <div class="data-panel">
-                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
-                    <a href="">4千姿百*泰特惠-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
-                    <a href="">千姿百泰-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-                    <a href="">千姿百*泰-动感篇7日游</a>
-                    <a href="">千姿百泰-动感升级篇7日游</a>
-                    <a href="">享时光-普吉一地6日游12.15</a>
-                    <a href="">千姿百*泰-动感升级篇7日游</a>
-                    <a href="">千姿百泰-乐享篇（12月31日）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                </div>
-                <div class="data-panel">
-                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
-                    <a href="">5千姿百*泰特惠-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
-                    <a href="">千姿百泰-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-                    <a href="">千姿百*泰-动感篇7日游</a>
-                    <a href="">千姿百泰-动感升级篇7日游</a>
-                    <a href="">享时光-普吉一地6日游12.15</a>
-                    <a href="">千姿百*泰-动感升级篇7日游</a>
-                    <a href="">千姿百泰-乐享篇（12月31日）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                </div>
-                <div class="data-panel">
-                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
-                    <a href="">6千姿百*泰特惠-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
-                    <a href="">千姿百泰-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-                    <a href="">千姿百*泰-动感篇7日游</a>
-                    <a href="">千姿百泰-动感升级篇7日游</a>
-                    <a href="">享时光-普吉一地6日游12.15</a>
-                    <a href="">千姿百*泰-动感升级篇7日游</a>
-                    <a href="">千姿百泰-乐享篇（12月31日）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                </div>
-                <div class="data-panel">
-                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
-                    <a href="">7千姿百*泰特惠-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
-                    <a href="">千姿百泰-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-                    <a href="">千姿百*泰-动感篇7日游</a>
-                    <a href="">千姿百泰-动感升级篇7日游</a>
-                    <a href="">享时光-普吉一地6日游12.15</a>
-                    <a href="">千姿百*泰-动感升级篇7日游</a>
-                    <a href="">千姿百泰-乐享篇（12月31日）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                </div>
-                <div class="data-panel">
-                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
-                    <a href="">8千姿百*泰特惠-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
-                    <a href="">千姿百泰-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-                    <a href="">千姿百*泰-动感篇7日游</a>
-                    <a href="">千姿百泰-动感升级篇7日游</a>
-                    <a href="">享时光-普吉一地6日游12.15</a>
-                    <a href="">千姿百*泰-动感升级篇7日游</a>
-                    <a href="">千姿百泰-乐享篇（12月31日）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                </div>
-                <div class="data-panel">
-                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
-                    <a href="">9千姿百*泰特惠-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
-                    <a href="">千姿百泰-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-                    <a href="">千姿百*泰-动感篇7日游</a>
-                    <a href="">千姿百泰-动感升级篇7日游</a>
-                    <a href="">享时光-普吉一地6日游12.15</a>
-                    <a href="">千姿百*泰-动感升级篇7日游</a>
-                    <a href="">千姿百泰-乐享篇（12月31日）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                </div>
-                <div class="data-panel">
-                    <img src="images/icon_arrow.gif" alt="" class="up-arrow">
-                    <a href="">10千姿百*泰特惠-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞5日游</a>
-                    <a href="">千姿百泰-动感篇7日游</a>
-                    <a href="">尊享度假-清迈，清莱双飞6天5晚</a>
-                    <a href="">千姿百*泰-动感篇7日游</a>
-                    <a href="">千姿百泰-动感升级篇7日游</a>
-                    <a href="">享时光-普吉一地6日游12.15</a>
-                    <a href="">千姿百*泰-动感升级篇7日游</a>
-                    <a href="">千姿百泰-乐享篇（12月31日）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                    <a href="">曼巴-清迈清莱四飞7晚8天（境外保底自费600）</a>
-                </div>-->
         <!--/菜单数据区-->
     </div>
 </div>
@@ -575,20 +423,5 @@
     });
 </script>
 
-<script>
-    function startLogin() {
-//    (new DialogBox).showIFrame("/LoginUI.aspx", "登录", 200, 300);
-        var url = "/LoginUI.aspx";                 //要访问的url
-        var selector = "#login";                    //jquery选择器
-        jQuery.post(url, null, function (data) {
-            changeContent(data, selector);
-        });
-    }
-    //回调函数
-    var changeContent = function (data, selector) {
-        var $content = jQuery(data).find(selector);
-        alert($content.html());
-    }
-</script>
 </body>
 </html>
