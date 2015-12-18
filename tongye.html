@@ -522,13 +522,14 @@
     $(document).ready(function () {
         var onNavUnit = false;
         var onDataPanel = false;
-
+        //导航条菜单触发函数
         $('#nav-panel').delegate('.nav-unit', 'mouseover', function () {
-            $('.data-panel').hide();
+            $('.data-panel').hide();    //隐藏老的下滑菜单
             var panelLeft = $(this).position().left;
             var panelTop = $(this).position().top + $(this).height() - 5;
             $(this).css({'z-index': '9'});
-            $('.data-panel:eq(' + $(this).index() + ')').css({
+            //定位下滑菜单的面板
+            $('.data-panel[keyword='+$(this).text()+']').css({
                 /*'opacity':'10', */
                 'left': panelLeft,
                 'top': panelTop
@@ -545,7 +546,7 @@
             doDatapanelClose();
         });
         function doDatapanelClose() {
-            console.log(onNavUnit, onDataPanel);
+            //console.log(onNavUnit, onDataPanel);
             window.setTimeout(function () {
                 if (!onNavUnit && !onDataPanel) {
                     $('.data-panel').hide();
