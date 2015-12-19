@@ -128,13 +128,8 @@
                             //console.log(result.value[j].tourdate, tourlistVM.datelist.length);
                         }
                     }).done(function(){
-                        /*
-                        for (var i=0; i<tourlistVM.datelist.length; i++){
-                            console.log(tourlistVM.datelist[i].tourdate, tourlistVM.datelist[i].tourproname);
-                        }
-                        */
                         tourlistVM.datelist.sort(function(a,b){
-                            console.log(a.tourdate,b.tourdate,parseInt(a.tourdate.replace(/-/g,''))-parseInt(b.tourdate.replace(/-/g,'')))
+                            //console.log(a.tourdate,b.tourdate,parseInt(a.tourdate.replace(/-/g,''))-parseInt(b.tourdate.replace(/-/g,'')))
                             return (parseInt(a.tourdate.replace(/-/g,''))-parseInt(b.tourdate.replace(/-/g,'')));
                         });
                     });
@@ -232,7 +227,9 @@
     <input id="fileterkey" type="text" value="" ms-duplex="filterkey">
     <span style="margin-right:2em;" class="filter-unit" key="">全部</span>
     <span style="margin-right:2em;" ms-attr-lineid="{{el.lineid}}" ms-repeat="list" class="filter-unit" ms-attr-key="{{el.tourproname}}">{{el.tourproname}}</span>
+    <taxtarea id="memo">
 
+    </taxtarea>
     <table style="width:100%;">
         <tr>
             <th>状态</th>
@@ -322,9 +319,14 @@
             }, 3000);
         }
 
-        //过滤器
+        //点击过滤器的行为
         $('#tourlist').delegate('.filter-unit','click',function(){
+            //设置过滤显示
             $('#fileterkey').val($(this).attr('key'));
+            //显示注意信息
+            $.getJSON('http://www.htyou.com/mobile/ipad_getTourTeam.action?jsoncallback=?&lineid='+$(this).attr('lineid'),function(result){
+                $('#memo').text(result.value.booknotes+'\n'+result.value.memo);
+            });
         });
 
     });
