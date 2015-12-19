@@ -99,10 +99,8 @@
             }).done(function() {
                 //console.log('done');
                 for (var i = 0; i < navVM.list.length; i++) {
-                    var index   = i;
-                    var name    = navVM.list[i];
 
-                    $.getJSON('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + encodeURI(navVM.list[i]), function (result) {
+                    $.getJSON('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + encodeURI(itemid), function (result) {
                         if (result.value != null) {
                             dataVM.list.push(result);
                         }
