@@ -13,5 +13,8 @@
     > http://www.htyou.com/mobile/ipad_queryTourLine.action?featured=同行&KeyWords=泰国
     
 - 取某个线路的行程数据
-	> http://www.htyou.com/mobile/ipad_queryTourTeam.action?lineid=10691
+	> http://www.htyou.com/mobile/ipad_queryTourTeam.action?lineid=
+
+- 取线路详细信息用：
+	> http://www.htyou.com/mobile/ipad_getTourTeam.action?lineid=22482
 	
