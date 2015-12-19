@@ -95,7 +95,7 @@
             $.getJSON('http://www.htyou.com/common/websinfo_queryHTClass.action?datatype=json&classId=728&jsoncallback=?', function (result) {
                 navVM.list = result[0].notes.split(' ');
                 //console.log(result, list);
-            }).done(function () {
+            }).done(function() {
                 //console.log('done');
                 for (var i = 0; i < navVM.list.length; i++) {
                     var index   = i;

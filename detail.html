@@ -78,6 +78,8 @@
 
     </style>
     <script>
+        var itemid  = '泰国';
+
         avalon.ready(function () {
             //全局VM
             var navVM = avalon.define({
@@ -94,7 +96,18 @@
 
             $.getJSON('http://www.htyou.com/common/websinfo_queryHTClass.action?datatype=json&classId=728&jsoncallback=?', function (result) {
                 navVM.list = result[0].notes.split(' ');
-                //console.log(result, list);
+            }).done(function() {
+                //console.log('done');
+                for (var i = 0; i < navVM.list.length; i++) {
+                    var index   = i;
+                    var name    = navVM.list[i];
+
+                    $.getJSON('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + encodeURI(navVM.list[i]), function (result) {
+                        if (result.value != null) {
+                            dataVM.list.push(result);
+                        }
+                    });
+                }
             });
         });
     </script>
@@ -182,157 +195,6 @@
     <img src="http://www.op166.com/_upload/image/125/20140324014445934593.jpg" alt="">
 </div>
 <!--/顶部Banner-->
-<!--上部可滚动Gallery-->
-<style>
-    #gallery {
-        margin: 10px auto 0 auto;
-        width: 1000px;
-        height: 378px;
-        position: relative;
-    }
-
-    #gallery .bigpic-panel {
-        width: 1000px;
-        height: 378px;
-    }
-
-    #gallery .bigpic-panel a img {
-        width: 1000px;
-        height: 378px;
-    }
-
-    #gallery .topic-panel {
-        position: absolute;
-        width: 1000px;
-        height: 20px;
-        bottom: 20px;
-        left: 0;
-        text-align: center;
-
-    }
-
-    .topic-panel .gallery-unit {
-        width: 12px;
-        height: 12px;
-        display: inline-block;
-        border: 1px solid #e5e5e5;
-        background-color: #FFF;
-        cursor: pointer;
-        margin: auto 2px;
-
-        *display: inline;
-        zoom: 1;
-    }
-
-    .topic-panel .gallery-unit.active {
-        border: 1px solid #e5e5e5;
-        background-color: #FF6600;
-    }
-</style>
-<div id="gallery">
-    <div class="bigpic-panel">
-        <a href="#">
-            <img src="http://www.htyou.com/pic/adpic/2015-12-02_15-31-45_0843.jpg" alt="">
-        </a>
-    </div>
-    <div class="topic-panel">
-        <div class="topic-unit gallery-unit active" pic="pic/adpic/2015-12-02_15-31-45_0843.jpg"
-             link="/tour/type/month/keyword台湾_包机.htm"></div>
-        <div class="topic-unit gallery-unit" pic="pic/adpic/2015-12-14_09-12-11_8486.jpg"
-             link="/tour/type/month/keyword长滩.htm"></div>
-        <div class="topic-unit gallery-unit" pic="pic/adpic/2015-11-26_09-25-35_9743.jpg"
-             link="/tour/tourbrowse/10603.htm"></div>
-        <div class="topic-unit gallery-unit" pic="pic/adpic/2015-11-09_16-37-14_1746.jpg"
-             link="/tour/tourbrowse/10466.htm"></div>
-        <div class="topic-unit gallery-unit" pic="pic/adpic/2015-05-05_10-11-08_2130.jpg"
-             link="/tour/type/month/keyword韩国.htm"></div>
-    </div>
-</div>
-<!--/上部可滚动Gallery-->
-<!--产品列表-->
-<style>
-    .product-list {
-        margin-top: 15px;
-    }
-
-    .product-list .title {
-        width: 100%;
-        height: 28px;
-        line-height: 28px;
-        border-left: 4px solid #54a1c1;
-        position: relative;
-        color: #555;
-        font-size: 16px;
-        margin-bottom: 5px;
-    }
-
-    .product-list .title h2 {
-        color: #54a1c1;
-        display: inline;
-        padding: 0 10px;
-    }
-
-    .product-list .title span {
-        font-size: 16px;
-        line-height: 28px;
-    }
-
-    .product-list .title .morelink {
-        position: absolute;
-        right: 5px;
-        bottom: 3px;
-        color: #555;
-        line-height: 100%;
-    }
-
-    .product-list ul {
-        width: 1020px;
-    }
-
-    .product-list li {
-        width: 233px;
-        height: 174px;
-        /* padding: 5px; */
-        float: left;
-        margin-right: 20px;
-        margin-bottom: 15px;
-        /* border: 1px solid #E5E5E5; */
-        background-color: #F5F5F5;
-        overflow:hidden;
-    }
-
-    .product-list li img {
-        width: 233px;
-        height: 126px;
-        margin: 0 auto;
-    }
-
-    .product-list li a {
-        color: #555;
-        font-size: 16px;
-    }
-
-</style>
-
-<div ms-controller="data">
-    <!--产品列表模块-->
-    <div class="ty-width product-list" ms-repeat="list">
-        <div class="title">
-            <h2>{{el.value2.KeyWords}}</h2><span>产品列表</span>
-            <a href="#" class="morelink">查看更多</a>
-        </div>
-        <ul>
-            <li ms-repeat-elem="el.value">
-                <a ms-attr-href="{{elem.lineid}}" ms-attr-title="{{elem.tourproname}}">
-                    <img ms-attr-src="http://www.htyou.com/{{elem.spotviewpic}}" ms-attr-alt="{{elem.tourproname}}">
-                    {{elem.tourproname}}
-                </a>
-            </li>
-        </ul>
-        <div class="clear"></div>
-    </div>
-    <!--/产品列表模块-->
-</div>
 
 
 <!--侧边栏-->
@@ -370,13 +232,14 @@
     $(document).ready(function () {
         var onNavUnit = false;
         var onDataPanel = false;
-
+        //导航条菜单触发函数
         $('#nav-panel').delegate('.nav-unit', 'mouseover', function () {
-            $('.data-panel').hide();
+            $('.data-panel').hide();    //隐藏老的下滑菜单
             var panelLeft = $(this).position().left;
             var panelTop = $(this).position().top + $(this).height() - 5;
             $(this).css({'z-index': '9'});
-            $('.data-panel:eq(' + $(this).index() + ')').css({
+            //定位下滑菜单的面板
+            $('.data-panel[keyword='+$(this).text()+']').css({
                 /*'opacity':'10', */
                 'left': panelLeft,
                 'top': panelTop
@@ -393,32 +256,13 @@
             doDatapanelClose();
         });
         function doDatapanelClose() {
-            console.log(onNavUnit, onDataPanel);
+            //console.log(onNavUnit, onDataPanel);
             window.setTimeout(function () {
                 if (!onNavUnit && !onDataPanel) {
                     $('.data-panel').hide();
                 }
             }, 3000);
         }
-
-        //Gallery点击切换函数
-        $('.topic-panel').delegate('.topic-unit', 'click', function () {
-            $('.bigpic-panel').html('<a href="http://www.htyou.com' + $(this).attr('link') + '" target="_blank"><img src="http://www.htyou.com/' + $(this).attr('pic') + '" alt=""/></a>');
-            $('.topic-unit.active').removeClass('active');
-            $(this).addClass('active');
-        });
-        //Gallery自动切换函数
-        window.setInterval(function () {
-            //取得当前是第几个
-            var galleryIndex = $('.topic-unit.active').index();
-            var galleryLength = $('.topic-unit').length - 1;
-            //console.log(galleryIndex, galleryLength);
-            if (galleryIndex < galleryLength) {
-                $('.topic-unit').eq(galleryIndex + 1).click();
-            } else {
-                $('.topic-unit').eq(0).click();
-            }
-        }, 3000);
 
     });
 </script>
