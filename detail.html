@@ -92,18 +92,51 @@
                 list: []
             });
 
+            var tourlistVM = avalon.define({
+                $id: 'tourlist',
+                filterkey:'',
+                list: [],
+                datelist:[]
+            });
+
             avalon.scan();
 
+            // 异步载入顶部菜单
             $.getJSON('http://www.htyou.com/common/websinfo_queryHTClass.action?datatype=json&classId=728&jsoncallback=?', function (result) {
                 navVM.list = result[0].notes.split(' ');
             }).done(function() {
-                //console.log('done');
+                //console.log('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + encodeURI(navVM.list[i]));
                 for (var i = 0; i < navVM.list.length; i++) {
-
-                    $.getJSON('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + encodeURI(itemid), function (result) {
+                    $.getJSON('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + encodeURI(navVM.list[i]), function (result) {
                         if (result.value != null) {
                             dataVM.list.push(result);
                         }
+                    });
+                }
+                //console.log(dataVM.list);
+            });
+
+            //在入当前地区的产品列表
+            $.getJSON('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + encodeURI(itemid),function(result){
+                tourlistVM.list = result.value;
+                for(var i=0; i<tourlistVM.list.length; i++){
+                    $.getJSON('http://www.htyou.com/mobile/ipad_queryTourTeam.action?jsoncallback=?&lineid='+tourlistVM.list[i].lineid,function(result){
+                        //tourlistVM.datelist.push(result.value);
+                        for(var j=0; j<result.value.length; j++){
+                            //console.log(result.value[j].tourproname,typeof(result.value[j].tourproname));
+                            tourlistVM.datelist.push(result.value[j]);
+                            //console.log(result.value[j].tourdate, tourlistVM.datelist.length);
+                        }
+                    }).done(function(){
+                        /*
+                        for (var i=0; i<tourlistVM.datelist.length; i++){
+                            console.log(tourlistVM.datelist[i].tourdate, tourlistVM.datelist[i].tourproname);
+                        }
+                        */
+                        tourlistVM.datelist.sort(function(a,b){
+                            console.log(a.tourdate,b.tourdate,parseInt(a.tourdate.replace(/-/g,''))-parseInt(b.tourdate.replace(/-/g,'')))
+                            return (parseInt(a.tourdate.replace(/-/g,''))-parseInt(b.tourdate.replace(/-/g,'')));
+                        });
                     });
                 }
             });
@@ -194,7 +227,34 @@
 </div>
 <!--/顶部Banner-->
 
+<h3>start</h3>
+<div id="tourlist" ms-controller="tourlist">
+    <input id="fileterkey" type="text" value="" ms-duplex="filterkey">
+    <span style="margin-right:2em;" class="filter-unit" key="">全部</span>
+    <span style="margin-right:2em;" ms-attr-lineid="{{el.lineid}}" ms-repeat="list" class="filter-unit" ms-attr-key="{{el.tourproname}}">{{el.tourproname}}</span>
 
+    <table style="width:100%;">
+        <tr>
+            <th>状态</th>
+            <th>发团日期</th>
+            <th>线路ID</th>
+            <th>线路名称</th>
+            <th>成人价格</th>
+            <th>儿童价格</th>
+            <th>同行价格</th>
+        </tr>
+        <tr ms-repeat="datelist" ms-if-loop="el.tourproname.indexOf(filterkey)>-1">
+            <td>{{el.status}}</td>
+            <td>{{el.tourdate}}</td>
+            <td>{{el.tourproid}}</td>
+            <td>{{el.tourproname}}</td>
+            <td>{{el.adultprice}}</td>
+            <td>{{el.childprice}}</td>
+            <td>{{el.colleagueprice}}</td>
+        </tr>
+    </table>
+</div>
+<h3>end</h3>
 <!--侧边栏-->
 <!--公共Footer-->
 <style>
@@ -261,6 +321,11 @@
                 }
             }, 3000);
         }
+
+        //过滤器
+        $('#tourlist').delegate('.filter-unit','click',function(){
+            $('#fileterkey').val($(this).attr('key'));
+        });
 
     });
 </script>
