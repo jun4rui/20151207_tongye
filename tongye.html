@@ -114,12 +114,12 @@
     您的全球旅游顾问,华天国旅欢迎您!
 </div>
 <!--/顶部信息栏-->
-<div ms-controller="data">
-    <li ms-repeat-unit="list">
-        <h2>{{list.index}}</h2>
-        <a href="#" ms-repeat-sunit="unit.value">{{sunit[0]}}</a>
-    </li>
-</div>
+<!--<div ms-controller="data">-->
+    <!--<li ms-repeat-unit="list">-->
+        <!--<h2>{{list.index}}</h2>-->
+        <!--<a href="#" ms-repeat-sunit="unit.value">{{sunit[0]}}</a>-->
+    <!--</li>-->
+<!--</div>-->
 <!--顶部菜单-->
 <div id="navsection" ms-controller="data">
     <div id="nav-panel" class="ty-width">
@@ -145,13 +145,15 @@
 
             .data-panel a {
                 display: block;
-                font: 14px/2 'Microsoft YaHei', Arial;
+                font: 16px/2 'Microsoft YaHei', Arial;
                 color: #555;
+                border-bottom: 1px dashed #B7B4B4;
             }
 
             .data-panel a:hover {
-                color: #330;
-                background-color: #CCCCCC;
+                color: #F60;
+                /*background-color: #CCCCCC;*/
+                border-bottom:1px dashed #F60;
             }
 
             .data-panel .up-arrow {
