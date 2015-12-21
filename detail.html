@@ -157,6 +157,7 @@
             });
 
             //点击过滤器的行为
+	        //TODO:点击过滤器期间，再次点击无效
             $('#tourlist').delegate('.filter-unit','click',function(){
                 //清除高亮效果
                 $('.filter-unit.active').removeClass('active');
