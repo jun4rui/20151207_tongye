@@ -80,6 +80,7 @@
     </style>
     <script>
         var itemid  = '泰国';
+        var lineid  = 10690;
 
         avalon.ready(function () {
             //全局VM
@@ -102,6 +103,7 @@
 
             var detailVM    = avalon.define({
                 $id:'detail',
+	            title:'',
                 booknotes:'',
                 memo:''
             });
@@ -140,10 +142,16 @@
                             //console.log(result.value[j].tourdate, tourlistVM.datelist.length);
                         }
                     }).done(function(){
+	                    //按照日期排序
                         tourlistVM.datelist.sort(function(a,b){
                             //console.log(a.tourdate,b.tourdate,parseInt(a.tourdate.replace(/-/g,''))-parseInt(b.tourdate.replace(/-/g,'')))
                             return (parseInt(a.tourdate.replace(/-/g,''))-parseInt(b.tourdate.replace(/-/g,'')));
                         });
+	                    //如果有线路ID，则显示该线路ID的线路
+	                    if(lineid!=''){
+		                    //console.log('do lineid');
+		                    $('.filter-unit[lineid='+lineid+']').click();
+	                    }
                     });
                 }
             });
@@ -160,7 +168,10 @@
                 if ($(this).text()=='全部'){
                     detailVM.booknotes  = '';
                     detailVM.memo       = '';
+                    detailVM.title      = '';
                 }else{
+	                detailVM.title      = $(this).text();
+	                detailVM.booknotes  = '载入中...';
                     $.getJSON('http://www.htyou.com/mobile/ipad_getTourTeam.action?jsoncallback=?&lineid='+$(this).attr('lineid'),function(result){
                         detailVM.booknotes  = result.value.booknotes;
                         detailVM.memo       = result.value.memo;
@@ -285,6 +296,10 @@
         border: 1px solid #DFDFDF;
         background-color: #FFF;
     }
+	#memi {
+		padding:0;
+		margin:5px;
+	}
 </style>
 <div id="tourlist" ms-controller="tourlist">
     <div class="filter-panel">
@@ -294,6 +309,7 @@
     </div>
 
     <div id="memo" ms-controller="detail" ms-if="booknotes!='' && memo!=''">
+	    <h2>{{title}}</h2>
         {{booknotes|html|nl2br}}
         <!--{{memo|html|nl2br}}-->
     </div>
