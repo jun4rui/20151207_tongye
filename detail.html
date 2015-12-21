@@ -100,7 +100,18 @@
                 datelist:[]
             });
 
+            var detailVM    = avalon.define({
+                $id:'detail',
+                booknotes:'',
+                memo:''
+            });
+
             avalon.scan();
+
+            //自定义的nl2br过滤器
+            avalon.filters.nl2br = function(str){
+                return str.replace(/\n/g,'<br/>');
+            }
 
             // 异步载入顶部菜单
             $.getJSON('http://www.htyou.com/common/websinfo_queryHTClass.action?datatype=json&classId=728&jsoncallback=?', function (result) {
@@ -135,6 +146,27 @@
                         });
                     });
                 }
+            });
+
+            //点击过滤器的行为
+            $('#tourlist').delegate('.filter-unit','click',function(){
+                //清除高亮效果
+                $('.filter-unit.active').removeClass('active');
+                //设置高亮效果
+                $(this).addClass('active');
+                //设置过滤显示
+                $('#fileterkey').val($(this).attr('key'));
+                //显示注意信息
+                if ($(this).text()=='全部'){
+                    detailVM.booknotes  = '';
+                    detailVM.memo       = '';
+                }else{
+                    $.getJSON('http://www.htyou.com/mobile/ipad_getTourTeam.action?jsoncallback=?&lineid='+$(this).attr('lineid'),function(result){
+                        detailVM.booknotes  = result.value.booknotes;
+                        detailVM.memo       = result.value.memo;
+                    });
+                }
+
             });
         });
     </script>
@@ -261,8 +293,9 @@
         <span ms-attr-lineid="{{el.lineid}}" ms-repeat="list" class="filter-unit" ms-attr-key="{{el.tourproname}}">{{el.tourproname}}</span>
     </div>
 
-    <div id="memo">
-
+    <div id="memo" ms-controller="detail" ms-if="booknotes!='' && memo!=''">
+        {{booknotes|html|nl2br}}
+        <!--{{memo|html|nl2br}}-->
     </div>
 
     <style>
@@ -281,6 +314,11 @@
             background-color: #FFFBB1;
             cursor:pointer;
         }
+        #list-table td img {
+            width:20px;
+            height:20px;
+            margin:0 auto;
+        }
 
     </style>
     <table id="list-table">
@@ -292,6 +330,7 @@
             <th>成人价格</th>
             <th>儿童价格</th>
             <th>同行价格</th>
+            <th>文档</th>
         </tr>
         <tr ms-repeat="datelist" ms-if-loop="el.tourproname.indexOf(filterkey)>-1">
             <td ms-if="el.status=='满员'" style="color:orange">{{el.status}}</td>
@@ -302,6 +341,11 @@
             <td>{{el.adultprice}}</td>
             <td>{{el.childprice}}</td>
             <td>{{el.colleagueprice}}</td>
+            <td>
+                <a ms-attr-href="http://www.htyou.com/common/FileDownload.action?jzluid={{el.jzluid}}&number=230002" target="_blank">
+                    <img src="images/download_icon.png" alt="">
+                </a>
+            </td>
         </tr>
     </table>
 </div>
@@ -371,20 +415,6 @@
                 }
             }, 3000);
         }
-
-        //点击过滤器的行为
-        $('#tourlist').delegate('.filter-unit','click',function(){
-            //清除高亮效果
-            $('.filter-unit.active').removeClass('active');
-            //设置高亮效果
-            $(this).addClass('active');
-            //设置过滤显示
-            $('#fileterkey').val($(this).attr('key'));
-            //显示注意信息
-            $.getJSON('http://www.htyou.com/mobile/ipad_getTourTeam.action?jsoncallback=?&lineid='+$(this).attr('lineid'),function(result){
-                $('#memo').text(result.value.booknotes+'\n'+result.value.memo);
-            });
-        });
 
         //表格当前行高亮
         $('#list-table').delegate('td', 'mouseover', function(){
