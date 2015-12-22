@@ -67,7 +67,8 @@
             cursor: pointer;
         }
 
-        .nav-link a {
+        .nav-link a,
+        .nav-unit a {
             color: #404040;
         }
 
@@ -206,8 +207,10 @@
 <div id="navsection" ms-controller="data">
     <div id="nav-panel" class="ty-width">
         <ul ms-controller="nav">
-            <li class="nav-link"><a href="#">首页</a></li>
-            <li class="nav-unit" ms-repeat-unit="list">{{unit}}</li>
+            <li class="nav-link"><a href="tongye.html">首页</a></li>
+            <li class="nav-unit" ms-repeat-unit="list">
+	            <a ms-attr-href="detail.html?itemid={{unit}}">{{unit}}</a>
+            </li>
             <li class="nav-link"><a href="#">关于我们</a></li>
         </ul>
         <!--菜单数据区-->
@@ -250,7 +253,7 @@
         </style>
         <div class="data-panel" ms-repeat="list" ms-attr-keyword="{{el.value2.KeyWords}}">
             <img src="images/icon_arrow.gif" alt="" class="up-arrow">
-            <a ms-attr-href="{{elem.lineid}}" ms-repeat-elem="el.value">{{elem.tourproname}}</a>
+            <a ms-attr-href="detail.html?itemid={{el.value2.KeyWords}}&lineid={{elem.lineid}}" ms-repeat-elem="el.value">{{elem.tourproname}}</a>
         </div>
         <!--/菜单数据区-->
     </div>
