@@ -81,13 +81,13 @@
 
     </style>
     <script>
-        var itemid  = getParameterValue(window.location.href,'itemid');
+        var itemid  = encodeURI(decodeURI(getParameterValue(window.location.href,'itemid')));//避免IE低版本和现代浏览器的不同处理导致字符编码问题，所以来回先解码再编码
         var lineid  = getParameterValue(window.location.href,'lineid');
         //console.log(typeof(itemid),itemid, typeof(lineid), lineid);
         //未定义itemid则跳转到列表页
         if(itemid==''){
 			//window.location.href= 'tongye.html';
-	        console.log('Jump to tongye.html');
+	        //console.log('Jump to tongye.html');
         }
 
         avalon.ready(function () {
@@ -139,34 +139,36 @@
             });
 
             //在入当前地区的产品列表
-	        console.log('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + (itemid));
+	        //console.log('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + (itemid));
+	        alert(itemid);
             $.getJSON('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + (itemid),function(result){
-                tourlistVM.list = result.value;
-                for(var i=0; i<tourlistVM.list.length; i++){
-                    $.getJSON('http://www.htyou.com/mobile/ipad_queryTourTeam.action?jsoncallback=?&lineid='+tourlistVM.list[i].lineid,function(result){
-                        //tourlistVM.datelist.push(result.value);
-                        for(var j=0; j<result.value.length; j++){
-                            //console.log(result.value[j].tourproname,typeof(result.value[j].tourproname));
-                            tourlistVM.datelist.push(result.value[j]);
-                            //console.log(result.value[j].tourdate, tourlistVM.datelist.length);
-                        }
-                    }).done(function(){
-	                    //按照日期排序
-                        tourlistVM.datelist.sort(function(a,b){
-                            //console.log(a.tourdate,b.tourdate,parseInt(a.tourdate.replace(/-/g,''))-parseInt(b.tourdate.replace(/-/g,'')))
-                            return (parseInt(a.tourdate.replace(/-/g,''))-parseInt(b.tourdate.replace(/-/g,'')));
-                        });
-	                    //如果有线路ID，则显示该线路ID的线路
-	                    if(lineid!=''){
-		                    //console.log('do lineid');
-		                    $('.filter-unit[lineid='+lineid+']').click();
-	                    }
-                    });
-                }
+	            if(result.value!=null){
+					tourlistVM.list = result.value;
+	                for(var i=0; i<tourlistVM.list.length; i++){
+	                    $.getJSON('http://www.htyou.com/mobile/ipad_queryTourTeam.action?jsoncallback=?&lineid='+tourlistVM.list[i].lineid,function(result){
+	                        //tourlistVM.datelist.push(result.value);
+	                        for(var j=0; j<result.value.length; j++){
+	                            //console.log(result.value[j].tourproname,typeof(result.value[j].tourproname));
+	                            tourlistVM.datelist.push(result.value[j]);
+	                            //console.log(result.value[j].tourdate, tourlistVM.datelist.length);
+	                        }
+	                    }).done(function(){
+		                    //按照日期排序
+	                        tourlistVM.datelist.sort(function(a,b){
+	                            //console.log(a.tourdate,b.tourdate,parseInt(a.tourdate.replace(/-/g,''))-parseInt(b.tourdate.replace(/-/g,'')))
+	                            return (parseInt(a.tourdate.replace(/-/g,''))-parseInt(b.tourdate.replace(/-/g,'')));
+	                        });
+		                    //如果有线路ID，则显示该线路ID的线路
+		                    if(lineid!=''){
+			                    //console.log('do lineid');
+			                    $('.filter-unit[lineid='+lineid+']').click();
+		                    }
+	                    });
+	                }
+	            }
             });
 
             //点击过滤器的行为
-	        //TODO:点击过滤器期间，再次点击无效
             $('#tourlist').delegate('.filter-unit','click',function(){
                 //清除高亮效果
                 $('.filter-unit.active').removeClass('active');
