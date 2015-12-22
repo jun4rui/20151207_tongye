@@ -79,8 +79,14 @@
 
     </style>
     <script>
-        var itemid  = '泰国';
-        var lineid  = 10690;
+        var itemid  = getParameterValue(window.location.href,'itemid');
+        var lineid  = getParameterValue(window.location.href,'lineid');
+        console.log(typeof(itemid),itemid, typeof(lineid), lineid);
+        //未定义itemid则跳转到列表页
+        if(itemid==''){
+			//window.location.href= 'tongye.html';
+	        console.log('Jump to tongye.html');
+        }
 
         avalon.ready(function () {
             //全局VM
@@ -131,7 +137,8 @@
             });
 
             //在入当前地区的产品列表
-            $.getJSON('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + encodeURI(itemid),function(result){
+	        console.log('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + (itemid));
+            $.getJSON('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + (itemid),function(result){
                 tourlistVM.list = result.value;
                 for(var i=0; i<tourlistVM.list.length; i++){
                     $.getJSON('http://www.htyou.com/mobile/ipad_queryTourTeam.action?jsoncallback=?&lineid='+tourlistVM.list[i].lineid,function(result){
