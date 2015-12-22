@@ -19,6 +19,7 @@
 
         img {
             display: block;
+	        border:0;
         }
 
         a {
@@ -82,7 +83,7 @@
     <script>
         var itemid  = getParameterValue(window.location.href,'itemid');
         var lineid  = getParameterValue(window.location.href,'lineid');
-        console.log(typeof(itemid),itemid, typeof(lineid), lineid);
+        //console.log(typeof(itemid),itemid, typeof(lineid), lineid);
         //未定义itemid则跳转到列表页
         if(itemid==''){
 			//window.location.href= 'tongye.html';
