@@ -314,6 +314,7 @@
         /* border: 1px solid #E5E5E5; */
         background-color: #F5F5F5;
         overflow:hidden;
+        position: relative;
     }
 
     .product-list li img {
@@ -325,6 +326,14 @@
     .product-list li a {
         color: #555;
         font-size: 16px;
+    }
+    .product-list>ul>li>span {
+        position: absolute;
+        right:0;
+        top:108px;
+        background:#000;
+        padding:0 .5em;
+        color:#FFF;
     }
 
 </style>
@@ -342,6 +351,7 @@
                 <img ms-attr-src="http://www.htyou.com/{{elem.spotviewpic}}" ms-attr-alt="{{elem.tourproname}}">
                 {{elem.tourproname}}
             </a>
+            <span>{{elem.leastprice}}元</span>
         </li>
     </ul>
     <div class="clear"></div>
