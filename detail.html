@@ -56,8 +56,7 @@
             position: relative;
         }
 
-        #nav-panel .nav-unit,
-        #nav-panel .nav-link {
+        #nav-panel .nav-unit {
             height: 54px;
             border-top: 3px solid #2689a5;
             /*display:inline;*/
@@ -68,13 +67,11 @@
             cursor: pointer;
         }
 
-        .nav-link a,
         .nav-unit a {
             color: #404040;
         }
 
-        #nav-panel .nav-unit:hover,
-        #nav-panel .nav-link:hover {
+        #nav-panel .nav-unit:hover {
             border-top: 3px solid #2ac7e5;
             background-color: #FFF;
         }
@@ -210,11 +207,11 @@
 <div id="navsection" ms-controller="data">
     <div id="nav-panel" class="ty-width">
         <ul ms-controller="nav">
-            <li class="nav-link"><a href="tongye.html">首页</a></li>
+            <li class="nav-unit"><a href="tongye.html">首页</a></li>
             <li class="nav-unit" ms-repeat-unit="list">
 	            <a ms-attr-href="detail.html?itemid={{unit}}">{{unit}}</a>
             </li>
-            <li class="nav-link"><a href="#">关于我们</a></li>
+            <li class="nav-unit"><a href="#">关于我们</a></li>
         </ul>
         <!--菜单数据区-->
         <style>
