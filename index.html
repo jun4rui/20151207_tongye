@@ -103,19 +103,14 @@
 				alert('请输入密码后重新登陆！');
 			}else {
 				//console.log('http://www.htyou.com/user/user_login.action?jsoncallback=?&code=caoxi&userPassword=' + $('#password').val() + '&codeType=account&url=www.htyou.com&backurl=tongye.html');
-				$.getJSON('http://www.htyou.com/user/user_login.action?jsoncallback=?&code=caoxi&userPassword=' + $('#password').val() + '&codeType=account&url=www.htyou.com&backurl=tongye.html', function (result) {
-					if ( result.message=='' ){
+				$.getJSON('http://www.htyou.com/user/user_login.action?jsoncallback=?&code=lyfx&userPassword=' + $('#password').val() + '&codeType=account&url=www.htyou.com&backurl=tongye.html', function (result) {
+					if ( result.status=='120302' ){
 						//登陆成功的处理
-						var banBackurl = checkban(result.backurl)
-						if (banBackurl==''){
-							window.location.href = result.backurl;
-						}else{
-							window.location.href = banBackurl;
-						}
+						window.location.href = result.backurl;
 					}else{
 						//登陆失败的处理
 						$('#checkcode').val('');
-						alert(result.message);
+						alert('帐号错误，请联系管理员');
 					}
 				});
 			}
