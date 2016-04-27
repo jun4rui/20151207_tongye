@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh_CN">
 <head>
-	<meta charset="UTF-8">
-	<title>å¤§æ­¥æ—…è¡Œ</title>
+	<meta charset="GBK">
+	<title>´ó²½ÂÃĞĞ</title>
 	<script src="jquery-1.11.0.min.js"></script>
 	<script src="common.js"></script>
 	<link rel="stylesheet" href="common.css">
@@ -59,24 +59,24 @@
 				try {
 					window.sidebar.addPanel(sTitle, sURL, "");
 				} catch (e) {
-					alert("æ‚¨çš„æµè§ˆå™¨ä¸æ”¯æŒï¼Œè¯·ä½¿ç”¨å¿«æ·é”®â€˜Ctrl+Dâ€™è¿›è¡Œæ”¶è—ï¼");
+					alert("ÄúµÄä¯ÀÀÆ÷²»Ö§³Ö£¬ÇëÊ¹ÓÃ¿ì½İ¼ü¡®Ctrl+D¡¯½øĞĞÊÕ²Ø£¡");
 				}
 			}
 		}
 
 		function doSubmit(){
 			if ( $('#password').val()=='' ){
-				alert('è¯·è¾“å…¥å¯†ç åé‡æ–°ç™»é™†ï¼');
+				alert('ÇëÊäÈëÃÜÂëºóÖØĞÂµÇÂ½£¡');
 			}else {
 				console.log('http://www.htyou.com/user/user_login.action?jsoncallback=?&code=lyfx&userPassword=' + $('#password').val() + '&codeType=account&url=www.htyou.com&backurl=tongye.html');
 				$.getJSON('http://www.htyou.com/user/user_login.action?jsoncallback=?&code=lyfx&userPassword=' + $('#password').val() + '&codeType=account&url=www.htyou.com&backurl=tongye.html', function (result) {
 					if ( result.status=='120302' ){
-						//ç™»é™†æˆåŠŸçš„å¤„ç†
+						//µÇÂ½³É¹¦µÄ´¦Àí
 						window.location.href = result.backurl;
 					}else{
-						//ç™»é™†å¤±è´¥çš„å¤„ç†
+						//µÇÂ½Ê§°ÜµÄ´¦Àí
 						$('#checkcode').val('');
-						alert('å¸å·é”™è¯¯ï¼Œè¯·è”ç³»ç®¡ç†å‘˜');
+						alert('ÕÊºÅ´íÎó£¬ÇëÁªÏµ¹ÜÀíÔ±');
 					}
 				});
 			}
@@ -84,7 +84,7 @@
 	</script>
 </head>
 <body>
-	<!--ä¸»å†…å®¹é¢æ¿-->
+	<!--Ö÷ÄÚÈİÃæ°å-->
 	<div id="main-panel">
 		<style>
 			#login-panel {
@@ -118,15 +118,15 @@
 				cursor: pointer;
 			}
 		</style>
-		<img id="logo-panel" src="images/logo_index.png" alt="åå¤©å›½é™…æ—…è¡Œç¤¾">
+		<img id="logo-panel" src="images/logo_index.png" alt="»ªÌì¹ú¼ÊÂÃĞĞÉç">
 		<div id="login-panel">
 
-			<input id="password" type="text" placeholder="è¯·è¾“å…¥è®¿é—®å¯†ç ">
+			<input id="password" type="text" placeholder="ÇëÊäÈë·ÃÎÊÃÜÂë">
 			<div id="login-button" onclick="doSubmit()"> </div>
 		</div>
 	</div>
-	<!--/ä¸»å†…å®¹é¢æ¿-->
-	<!--é¡µè„š-->
+	<!--/Ö÷ÄÚÈİÃæ°å-->
+	<!--Ò³½Å-->
 	<style>
 		#footer {
 			width: 100%;
@@ -151,10 +151,10 @@
 		}
 	</style>
 	<div id="footer">
-			<span onclick="javascript:addFavorite();">åŠ å…¥æ”¶è—</span>
-			åå¤©å›½æ—…åŒä¸šç³»ç»Ÿå®¢æœç”µè¯ï¼š<a href="tel:">xxxx-xxxxxxxx</a> æ¹–å—åå¤©å›½é™…æ—…è¡Œç¤¾ &copy;ç‰ˆæƒæ‰€æœ‰
+			<span onclick="javascript:addFavorite();">¼ÓÈëÊÕ²Ø</span>
+			»ªÌì¹úÂÃÍ¬ÒµÏµÍ³¿Í·şµç»°£º<a href="tel:">xxxx-xxxxxxxx</a> ºşÄÏ»ªÌì¹ú¼ÊÂÃĞĞÉç &copy;°æÈ¨ËùÓĞ
 	</div>
-	<!--/é¡µè„š-->
+	<!--/Ò³½Å-->
 	<script>
 		function resizeMain(){
 			$('#main-panel').width($(window).innerWidth());

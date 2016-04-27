@@ -1,457 +1,457 @@
 <!DOCTYPE html>
 <html lang="zh_CN">
 <head>
-    <meta charset="UTF-8">
-    <title>å¤§æ­¥æ—…è¡Œ</title>
-    <script src="jquery-1.11.0.min.js"></script>
-    <script src="avalon.js"></script>
-    <script src="common.js"></script>
-    <link rel="stylesheet" href="common.css">
-    <style>
-        body {
-            padding: 0;
-            margin: 0;
-            background-color: #f2f2f2;
-            color: #404040;
-            font: 12px/1.5 "Microsoft YaHei", Arial;
+	<meta charset="GBK">
+	<title>´ó²½ÂÃĞĞ</title>
+	<script src="jquery-1.11.0.min.js"></script>
+	<script src="avalon.js"></script>
+	<script src="common.js"></script>
+	<link rel="stylesheet" href="common.css">
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+			background-color: #f2f2f2;
+			color: #404040;
+			font: 12px/1.5 "Microsoft YaHei", Arial;
 
-        }
+		}
 
-        img {
-            display: block;
-	        border:0;
-        }
+		img {
+			display: block;
+			border:0;
+		}
 
-        a {
-            text-decoration: none;
-        }
+		a {
+			text-decoration: none;
+		}
 
-        ul, li {
-            padding: 0;
-            margin: 0;
-            list-style-type: none;
-        }
+		ul, li {
+			padding: 0;
+			margin: 0;
+			list-style-type: none;
+		}
 
-        .clear {
-            clear: both;
-        }
+		.clear {
+			clear: both;
+		}
 
-        .ty-width {
-            width: 1000px;
-            margin: 0 auto;
-        }
+		.ty-width {
+			width: 1000px;
+			margin: 0 auto;
+		}
 
-        #top-info-panel {
-            height: 30px;
-            line-height: 45px;
-        }
+		#top-info-panel {
+			height: 30px;
+			line-height: 45px;
+		}
 
-        #navsection {
-            width: 100%;
-            background: url(http://www.op166.com/images/menu-repeat.gif);
-        }
+		#navsection {
+			width: 100%;
+			background: url(http://www.op166.com/images/menu-repeat.gif);
+		}
 
-        #nav-panel {
-            height: 57px;
-            position: relative;
-        }
+		#nav-panel {
+			height: 57px;
+			position: relative;
+		}
 
-        #nav-panel .nav-unit {
-            height: 54px;
-            border-top: 3px solid #2689a5;
-            /*display:inline;*/
-            float: left;
-            padding: 0 1em;
-            font-size: 16px;
-            line-height: 54px;
-            cursor: pointer;
-        }
+		#nav-panel .nav-unit {
+			height: 54px;
+			border-top: 3px solid #2689a5;
+			/*display:inline;*/
+			float: left;
+			padding: 0 1em;
+			font-size: 16px;
+			line-height: 54px;
+			cursor: pointer;
+		}
 
-        .nav-unit a {
-            color: #404040;
-        }
+		.nav-unit a {
+			color: #404040;
+		}
 
-        #nav-panel .nav-unit:hover {
-            border-top: 3px solid #2ac7e5;
-            background-color: #FFF;
-        }
+		#nav-panel .nav-unit:hover {
+			border-top: 3px solid #2ac7e5;
+			background-color: #FFF;
+		}
 
-    </style>
-    <script>
-        var itemid  = encodeURI(decodeURI(getParameterValue(window.location.href,'itemid')));//é¿å…IEä½ç‰ˆæœ¬å’Œç°ä»£æµè§ˆå™¨çš„ä¸åŒå¤„ç†å¯¼è‡´å­—ç¬¦ç¼–ç é—®é¢˜ï¼Œæ‰€ä»¥æ¥å›å…ˆè§£ç å†ç¼–ç 
-        var lineid  = getParameterValue(window.location.href,'lineid');
-        //console.log(typeof(itemid),itemid, typeof(lineid), lineid);
-        //æœªå®šä¹‰itemidåˆ™è·³è½¬åˆ°åˆ—è¡¨é¡µ
-        if(itemid==''){
+	</style>
+	<script>
+		var itemid  = encodeURI(decodeURI(getParameterValue(window.location.href,'itemid')));//±ÜÃâIEµÍ°æ±¾ºÍÏÖ´úä¯ÀÀÆ÷µÄ²»Í¬´¦Àíµ¼ÖÂ×Ö·û±àÂëÎÊÌâ£¬ËùÒÔÀ´»ØÏÈ½âÂëÔÙ±àÂë
+		var lineid  = getParameterValue(window.location.href,'lineid');
+		//console.log(typeof(itemid),itemid, typeof(lineid), lineid);
+		//Î´¶¨ÒåitemidÔòÌø×ªµ½ÁĞ±íÒ³
+		if(itemid==''){
 			//window.location.href= 'tongye.html';
-	        //console.log('Jump to tongye.html');
-        }
+			//console.log('Jump to tongye.html');
+		}
 
-        avalon.ready(function () {
-            //å…¨å±€VM
-            var navVM = avalon.define({
-                $id: 'nav',
-                list: []
-            });
+		avalon.ready(function () {
+			//È«¾ÖVM
+			var navVM = avalon.define({
+				$id: 'nav',
+				list: []
+			});
 
-            var dataVM = avalon.define({
-                $id: 'data',
-                list: []
-            });
+			var dataVM = avalon.define({
+				$id: 'data',
+				list: []
+			});
 
-            var tourlistVM = avalon.define({
-                $id: 'tourlist',
-                filterkey:'',
-                list: [],
-                datelist:[]
-            });
+			var tourlistVM = avalon.define({
+				$id: 'tourlist',
+				filterkey:'',
+				list: [],
+				datelist:[]
+			});
 
-            var detailVM    = avalon.define({
-                $id:'detail',
-	            title:'',
-                booknotes:'',
-                memo:''
-            });
+			var detailVM    = avalon.define({
+				$id:'detail',
+				title:'',
+				booknotes:'',
+				memo:''
+			});
 
-            avalon.scan();
+			avalon.scan();
 
-            //è‡ªå®šä¹‰çš„nl2brè¿‡æ»¤å™¨
-            avalon.filters.nl2br = function(str){
-                return str.replace(/\n/g,'<br/>');
-            }
+			//×Ô¶¨ÒåµÄnl2br¹ıÂËÆ÷
+			avalon.filters.nl2br = function(str){
+				return str.replace(/\n/g,'<br/>');
+			}
 
-            // å¼‚æ­¥è½½å…¥é¡¶éƒ¨èœå•
-            $.getJSON('http://www.htyou.com/common/websinfo_queryHTClass.action?datatype=json&classId=728&jsoncallback=?', function (result) {
-                navVM.list = result[0].notes.split(' ');
-            }).done(function() {
-                //console.log('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + encodeURI(navVM.list[i]));
-                for (var i = 0; i < navVM.list.length; i++) {
-                    $.getJSON('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + encodeURI(navVM.list[i]), function (result) {
-                        if (result.value != null) {
-                            dataVM.list.push(result);
-                        }
-                    });
-                }
-                //console.log(dataVM.list);
-            });
+			// Òì²½ÔØÈë¶¥²¿²Ëµ¥
+			$.getJSON('http://www.htyou.com/common/websinfo_queryHTClass.action?datatype=json&classId=728&jsoncallback=?', function (result) {
+				navVM.list = result[0].notes.split(' ');
+			}).done(function() {
+				//console.log('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + encodeURI(navVM.list[i]));
+				for (var i = 0; i < navVM.list.length; i++) {
+					$.getJSON('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + encodeURI(navVM.list[i]), function (result) {
+						if (result.value != null) {
+							dataVM.list.push(result);
+						}
+					});
+				}
+				//console.log(dataVM.list);
+			});
 
-            //åœ¨å…¥å½“å‰åœ°åŒºçš„äº§å“åˆ—è¡¨
-	        //console.log('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + (itemid));
-	        alert(itemid);
-            $.getJSON('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + (itemid),function(result){
-	            if(result.value!=null){
+			//ÔÚÈëµ±Ç°µØÇøµÄ²úÆ·ÁĞ±í
+			//console.log('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + (itemid));
+			alert(itemid);
+			$.getJSON('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + (itemid),function(result){
+				if(result.value!=null){
 					tourlistVM.list = result.value;
-	                for(var i=0; i<tourlistVM.list.length; i++){
-	                    $.getJSON('http://www.htyou.com/mobile/ipad_queryTourTeam.action?jsoncallback=?&lineid='+tourlistVM.list[i].lineid,function(result){
-	                        //tourlistVM.datelist.push(result.value);
-	                        for(var j=0; j<result.value.length; j++){
-	                            //console.log(result.value[j].tourproname,typeof(result.value[j].tourproname));
-	                            tourlistVM.datelist.push(result.value[j]);
-	                            //console.log(result.value[j].tourdate, tourlistVM.datelist.length);
-	                        }
-	                    }).done(function(){
-		                    //æŒ‰ç…§æ—¥æœŸæ’åº
-	                        tourlistVM.datelist.sort(function(a,b){
-	                            //console.log(a.tourdate,b.tourdate,parseInt(a.tourdate.replace(/-/g,''))-parseInt(b.tourdate.replace(/-/g,'')))
-	                            return (parseInt(a.tourdate.replace(/-/g,''))-parseInt(b.tourdate.replace(/-/g,'')));
-	                        });
-		                    //å¦‚æœæœ‰çº¿è·¯IDï¼Œåˆ™æ˜¾ç¤ºè¯¥çº¿è·¯IDçš„çº¿è·¯
-		                    if(lineid!=''){
-			                    //console.log('do lineid');
-			                    $('.filter-unit[lineid='+lineid+']').click();
-		                    }
-	                    });
-	                }
-	            }
-            });
+					for(var i=0; i<tourlistVM.list.length; i++){
+						$.getJSON('http://www.htyou.com/mobile/ipad_queryTourTeam.action?jsoncallback=?&lineid='+tourlistVM.list[i].lineid,function(result){
+							//tourlistVM.datelist.push(result.value);
+							for(var j=0; j<result.value.length; j++){
+								//console.log(result.value[j].tourproname,typeof(result.value[j].tourproname));
+								tourlistVM.datelist.push(result.value[j]);
+								//console.log(result.value[j].tourdate, tourlistVM.datelist.length);
+							}
+						}).done(function(){
+							//°´ÕÕÈÕÆÚÅÅĞò
+							tourlistVM.datelist.sort(function(a,b){
+								//console.log(a.tourdate,b.tourdate,parseInt(a.tourdate.replace(/-/g,''))-parseInt(b.tourdate.replace(/-/g,'')))
+								return (parseInt(a.tourdate.replace(/-/g,''))-parseInt(b.tourdate.replace(/-/g,'')));
+							});
+							//Èç¹ûÓĞÏßÂ·ID£¬ÔòÏÔÊ¾¸ÃÏßÂ·IDµÄÏßÂ·
+							if(lineid!=''){
+								//console.log('do lineid');
+								$('.filter-unit[lineid='+lineid+']').click();
+							}
+						});
+					}
+				}
+			});
 
-            //ç‚¹å‡»è¿‡æ»¤å™¨çš„è¡Œä¸º
-            $('#tourlist').delegate('.filter-unit','click',function(){
-                //æ¸…é™¤é«˜äº®æ•ˆæœ
-                $('.filter-unit.active').removeClass('active');
-                //è®¾ç½®é«˜äº®æ•ˆæœ
-                $(this).addClass('active');
-                //è®¾ç½®è¿‡æ»¤æ˜¾ç¤º
-                $('#fileterkey').val($(this).attr('key'));
-                //æ˜¾ç¤ºæ³¨æ„ä¿¡æ¯
-                if ($(this).text()=='å…¨éƒ¨'){
-                    detailVM.booknotes  = '';
-                    detailVM.memo       = '';
-                    detailVM.title      = '';
-                }else{
-	                detailVM.title      = $(this).text();
-	                detailVM.booknotes  = 'è½½å…¥ä¸­...';
-                    $.getJSON('http://www.htyou.com/mobile/ipad_getTourTeam.action?jsoncallback=?&lineid='+$(this).attr('lineid'),function(result){
-                        detailVM.booknotes  = result.value.booknotes;
-                        detailVM.memo       = result.value.memo;
-                    });
-                }
+			//µã»÷¹ıÂËÆ÷µÄĞĞÎª
+			$('#tourlist').delegate('.filter-unit','click',function(){
+				//Çå³ı¸ßÁÁĞ§¹û
+				$('.filter-unit.active').removeClass('active');
+				//ÉèÖÃ¸ßÁÁĞ§¹û
+				$(this).addClass('active');
+				//ÉèÖÃ¹ıÂËÏÔÊ¾
+				$('#fileterkey').val($(this).attr('key'));
+				//ÏÔÊ¾×¢ÒâĞÅÏ¢
+				if ($(this).text()=='È«²¿'){
+					detailVM.booknotes  = '';
+					detailVM.memo       = '';
+					detailVM.title      = '';
+				}else{
+					detailVM.title      = $(this).text();
+					detailVM.booknotes  = 'ÔØÈëÖĞ...';
+					$.getJSON('http://www.htyou.com/mobile/ipad_getTourTeam.action?jsoncallback=?&lineid='+$(this).attr('lineid'),function(result){
+						detailVM.booknotes  = result.value.booknotes;
+						detailVM.memo       = result.value.memo;
+					});
+				}
 
-            });
-        });
-    </script>
+			});
+		});
+	</script>
 </head>
 <body>
-<!--é¡¶éƒ¨ä¿¡æ¯æ -->
+<!--¶¥²¿ĞÅÏ¢À¸-->
 <div id="top-info-panel" class="ty-width">
-    æ‚¨çš„å…¨çƒæ—…æ¸¸é¡¾é—®,åå¤©å›½æ—…æ¬¢è¿æ‚¨!
+	ÄúµÄÈ«ÇòÂÃÓÎ¹ËÎÊ,»ªÌì¹úÂÃ»¶Ó­Äú!
 </div>
-<!--/é¡¶éƒ¨ä¿¡æ¯æ -->
+<!--/¶¥²¿ĞÅÏ¢À¸-->
 <!--<div ms-controller="data">
     <li ms-repeat-unit="list">
         <h2>{{list.index}}</h2>
         <a href="#" ms-repeat-sunit="unit.value">{{sunit[0]}}</a>
     </li>
 </div>-->
-<!--é¡¶éƒ¨èœå•-->
+<!--¶¥²¿²Ëµ¥-->
 <div id="navsection" ms-controller="data">
-    <div id="nav-panel" class="ty-width">
-        <ul ms-controller="nav">
-            <li class="nav-unit"><a href="tongye.html">é¦–é¡µ</a></li>
-            <li class="nav-unit" ms-repeat-unit="list">
-	            <a ms-attr-href="detail.html?itemid={{unit}}">{{unit}}</a>
-            </li>
-            <li class="nav-unit"><a href="#">å…³äºæˆ‘ä»¬</a></li>
-        </ul>
-        <!--èœå•æ•°æ®åŒº-->
-        <style>
-            .data-panel {
-                position: absolute;
-                z-index: 2;
-                width: 400px;
-                padding: 2em 1em;
-                height: auto;
-                border: 1px solid #DFDFDF;
-                background-color: #FFF;
-                box-shadow: 5px 5px 15px #999;
-                display: none;
-                border-radius: 5px;
-            }
+	<div id="nav-panel" class="ty-width">
+		<ul ms-controller="nav">
+			<li class="nav-unit"><a href="tongye.html">Ê×Ò³</a></li>
+			<li class="nav-unit" ms-repeat-unit="list">
+				<a ms-attr-href="detail.html?itemid={{unit}}">{{unit}}</a>
+			</li>
+			<li class="nav-unit"><a href="#">¹ØÓÚÎÒÃÇ</a></li>
+		</ul>
+		<!--²Ëµ¥Êı¾İÇø-->
+		<style>
+			.data-panel {
+				position: absolute;
+				z-index: 2;
+				width: 400px;
+				padding: 2em 1em;
+				height: auto;
+				border: 1px solid #DFDFDF;
+				background-color: #FFF;
+				box-shadow: 5px 5px 15px #999;
+				display: none;
+				border-radius: 5px;
+			}
 
-            .data-panel a {
-                display: block;
-                font: 16px/2 'Microsoft YaHei', Arial;
-                color: #555;
-                border-bottom: 1px dashed #B7B4B4;
-            }
+			.data-panel a {
+				display: block;
+				font: 16px/2 'Microsoft YaHei', Arial;
+				color: #555;
+				border-bottom: 1px dashed #B7B4B4;
+			}
 
-            .data-panel a:hover {
-                color: #F60;
-                /*background-color: #CCCCCC;*/
-                border-bottom:1px dashed #F60;
-            }
+			.data-panel a:hover {
+				color: #F60;
+				/*background-color: #CCCCCC;*/
+				border-bottom:1px dashed #F60;
+			}
 
-            .data-panel .up-arrow {
-                width: 15px;
-                height: 15px;
-                z-index: 3;
-                position: absolute;
-                top: -14px;
-                left: 1.5em;
-            }
+			.data-panel .up-arrow {
+				width: 15px;
+				height: 15px;
+				z-index: 3;
+				position: absolute;
+				top: -14px;
+				left: 1.5em;
+			}
 
-        </style>
-        <div class="data-panel" ms-repeat="list" ms-attr-keyword="{{el.value2.KeyWords}}">
-            <img src="images/icon_arrow.gif" alt="" class="up-arrow">
-            <a ms-attr-href="detail.html?itemid={{el.value2.KeyWords}}&lineid={{elem.lineid}}" ms-repeat-elem="el.value">{{elem.tourproname}}</a>
-        </div>
-        <!--/èœå•æ•°æ®åŒº-->
-    </div>
+		</style>
+		<div class="data-panel" ms-repeat="list" ms-attr-keyword="{{el.value2.KeyWords}}">
+			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
+			<a ms-attr-href="detail.html?itemid={{el.value2.KeyWords}}&lineid={{elem.lineid}}" ms-repeat-elem="el.value">{{elem.tourproname}}</a>
+		</div>
+		<!--/²Ëµ¥Êı¾İÇø-->
+	</div>
 </div>
-<!--/é¡¶éƒ¨èœå•-->
-<!--é¡¶éƒ¨Banner-->
+<!--/¶¥²¿²Ëµ¥-->
+<!--¶¥²¿Banner-->
 <style>
-    #top-banner-section {
-        width: 100%;
-        height: 190px;
-        border-bottom: 1px solid #CCC;
-        box-shadow: 0 1px 3px #CCC;
-    }
+	#top-banner-section {
+		width: 100%;
+		height: 190px;
+		border-bottom: 1px solid #CCC;
+		box-shadow: 0 1px 3px #CCC;
+	}
 
-    #top-banner-section > img {
-        margin: 0 auto;
-        width: 1000px;
-        height: 190px;
-    }
+	#top-banner-section > img {
+		margin: 0 auto;
+		width: 1000px;
+		height: 190px;
+	}
 </style>
 <div id="top-banner-section">
-    <img src="http://www.op166.com/_upload/image/125/20140324014445934593.jpg" alt="">
+	<img src="http://www.op166.com/_upload/image/125/20140324014445934593.jpg" alt="">
 </div>
-<!--/é¡¶éƒ¨Banner-->
+<!--/¶¥²¿Banner-->
 
 
 <style>
-    #tourlist {
-        width:1000px;
-        margin:15px auto;
-        font:14px/1.5 'Microsoft YaHei',Arial;
-    }
-    #tourlist .filter-panel {
-        font-size:16px;
-        border: 1px solid #AEA8A8;
-        background-color: #F0F0F0;
-    }
-    #tourlist .filter-unit {
-        padding:0 .5em;
-        cursor: pointer;
-        color:#2588A3;
-    }
-    .filter-unit.active {
-        color:#FFF !important;
-        background-color:#F00;
-    }
-    .filter-unit:hover {
-        background:#FFFF00;
-        color:#2588A3 !important;
-    }
-    #memo {
-        padding: .5em;
-        border: 1px solid #DFDFDF;
-        background-color: #FFF;
-    }
+	#tourlist {
+		width:1000px;
+		margin:15px auto;
+		font:14px/1.5 'Microsoft YaHei',Arial;
+	}
+	#tourlist .filter-panel {
+		font-size:16px;
+		border: 1px solid #AEA8A8;
+		background-color: #F0F0F0;
+	}
+	#tourlist .filter-unit {
+		padding:0 .5em;
+		cursor: pointer;
+		color:#2588A3;
+	}
+	.filter-unit.active {
+		color:#FFF !important;
+		background-color:#F00;
+	}
+	.filter-unit:hover {
+		background:#FFFF00;
+		color:#2588A3 !important;
+	}
+	#memo {
+		padding: .5em;
+		border: 1px solid #DFDFDF;
+		background-color: #FFF;
+	}
 	#memi {
 		padding:0;
 		margin:5px;
 	}
 </style>
 <div id="tourlist" ms-controller="tourlist">
-    <div class="filter-panel">
-        <input id="fileterkey" type="hidden" value="" ms-duplex="filterkey">
-        <span class="filter-unit active" key="">å…¨éƒ¨</span>
-        <span ms-attr-lineid="{{el.lineid}}" ms-repeat="list" class="filter-unit" ms-attr-key="{{el.tourproname}}">{{el.tourproname}}</span>
-    </div>
+	<div class="filter-panel">
+		<input id="fileterkey" type="hidden" value="" ms-duplex="filterkey">
+		<span class="filter-unit active" key="">È«²¿</span>
+		<span ms-attr-lineid="{{el.lineid}}" ms-repeat="list" class="filter-unit" ms-attr-key="{{el.tourproname}}">{{el.tourproname}}</span>
+	</div>
 
-    <div id="memo" ms-controller="detail" ms-if="booknotes!='' && memo!=''">
-	    <h2>{{title}}</h2>
-        {{booknotes|html|nl2br}}
-        <!--{{memo|html|nl2br}}-->
-    </div>
+	<div id="memo" ms-controller="detail" ms-if="booknotes!='' && memo!=''">
+		<h2>{{title}}</h2>
+		{{booknotes|html|nl2br}}
+		<!--{{memo|html|nl2br}}-->
+	</div>
 
-    <style>
-        #list-table {
-            font:14px/30px 'Microsoft YaHei',Arial;
-            margin-top:15px;
-            width:100%;
-            border: 1px solid #E9E9E9;
-            border-spacing: 1px;
-        }
-        #list-table td {
-            background-color: #FFF;
-            text-align:center;
-        }
-        #list-table tr.hover td {
-            background-color: #FFFBB1;
-            cursor:pointer;
-        }
-        #list-table td img {
-            width:20px;
-            height:20px;
-            margin:0 auto;
-        }
+	<style>
+		#list-table {
+			font:14px/30px 'Microsoft YaHei',Arial;
+			margin-top:15px;
+			width:100%;
+			border: 1px solid #E9E9E9;
+			border-spacing: 1px;
+		}
+		#list-table td {
+			background-color: #FFF;
+			text-align:center;
+		}
+		#list-table tr.hover td {
+			background-color: #FFFBB1;
+			cursor:pointer;
+		}
+		#list-table td img {
+			width:20px;
+			height:20px;
+			margin:0 auto;
+		}
 
-    </style>
-    <table id="list-table">
-        <tr style="background:url(images/table_bg.gif) repeat-x;">
-            <th>çŠ¶æ€</th>
-            <th>å‘å›¢æ—¥æœŸ</th>
-            <th>çº¿è·¯ID</th>
-            <th>çº¿è·¯åç§°</th>
-            <th>æˆäººä»·æ ¼</th>
-            <th>å„¿ç«¥ä»·æ ¼</th>
-            <th>åŒè¡Œä»·æ ¼</th>
-            <th>æ–‡æ¡£</th>
-        </tr>
-        <tr ms-repeat="datelist" ms-if-loop="el.tourproname.indexOf(filterkey)>-1">
-            <td ms-if="el.status=='æ»¡å‘˜'" style="color:orange">{{el.status}}</td>
-            <td ms-if="el.status!='æ»¡å‘˜'" style="color:green">{{el.status}}</td>
-            <td>{{el.tourdate}}</td>
-            <td>{{el.tourproid}}</td>
-            <td>{{el.tourproname}}</td>
-            <td>{{el.adultprice}}</td>
-            <td>{{el.childprice}}</td>
-            <td>{{el.colleagueprice}}</td>
-            <td>
-                <a ms-attr-href="http://www.htyou.com/common/FileDownload.action?jzluid={{el.jzluid}}&number=230002" target="_blank">
-                    <img src="images/download_icon.png" alt="">
-                </a>
-            </td>
-        </tr>
-    </table>
+	</style>
+	<table id="list-table">
+		<tr style="background:url(images/table_bg.gif) repeat-x;">
+			<th>×´Ì¬</th>
+			<th>·¢ÍÅÈÕÆÚ</th>
+			<th>ÏßÂ·ID</th>
+			<th>ÏßÂ·Ãû³Æ</th>
+			<th>³ÉÈË¼Û¸ñ</th>
+			<th>¶ùÍ¯¼Û¸ñ</th>
+			<th>Í¬ĞĞ¼Û¸ñ</th>
+			<th>ÎÄµµ</th>
+		</tr>
+		<tr ms-repeat="datelist" ms-if-loop="el.tourproname.indexOf(filterkey)>-1">
+			<td ms-if="el.status=='ÂúÔ±'" style="color:orange">{{el.status}}</td>
+			<td ms-if="el.status!='ÂúÔ±'" style="color:green">{{el.status}}</td>
+			<td>{{el.tourdate}}</td>
+			<td>{{el.tourproid}}</td>
+			<td>{{el.tourproname}}</td>
+			<td>{{el.adultprice}}</td>
+			<td>{{el.childprice}}</td>
+			<td>{{el.colleagueprice}}</td>
+			<td>
+				<a ms-attr-href="http://www.htyou.com/common/FileDownload.action?jzluid={{el.jzluid}}&number=230002" target="_blank">
+					<img src="images/download_icon.png" alt="">
+				</a>
+			</td>
+		</tr>
+	</table>
 </div>
-<!--ä¾§è¾¹æ -->
-<!--å…¬å…±Footer-->
+<!--²à±ßÀ¸-->
+<!--¹«¹²Footer-->
 <style>
-    #footer {
-        padding: 20px 20px;
-        color: #e5e5e5;
-        text-align: center;
-        line-height: 220%;
-        font-family: 'Arial';
-        width: 100%;
-        margin: 0 auto;
-        display: block;
-        background-image: url(http://www.op166.com/images/footer-bg.gif);
-        border-top: 1px solid #e5e5e5;
-    }
+	#footer {
+		padding: 20px 20px;
+		color: #e5e5e5;
+		text-align: center;
+		line-height: 220%;
+		font-family: 'Arial';
+		width: 100%;
+		margin: 0 auto;
+		display: block;
+		background-image: url(http://www.op166.com/images/footer-bg.gif);
+		border-top: 1px solid #e5e5e5;
+	}
 
-    #footer a {
-        color: #FF0;
-    }
+	#footer a {
+		color: #FF0;
+	}
 </style>
 <div id="footer">
-    Copyright Â© 2015 <a href="http://www.htyou.com" target="_blank" class="link-color">www.htyou.com</a>
-    æ¹–å—åå¤©å›½é™…æ—…è¡Œç¤¾æœ‰é™è´£ä»»å…¬å¸ç‰ˆæƒæ‰€æœ‰<br>
-    æ—…è¡Œç¤¾ä¸šåŠ¡è®¸å¯è¯ç¼–å·ï¼šL-HUN-CJ00001 æ¹˜ICPå¤‡12003410å·<br>
-    ç»è¥èŒƒå›´ï¼šå›½å†…æ—…æ¸¸ã€å…¥å¢ƒæ—…æ¸¸ã€å‡ºå¢ƒæ—…æ¸¸ æ³•å®šä»£è¡¨äººï¼šå­™æ ¹çŸ³<br>
-    æ¹–å—åå¤©æ—…è¡Œç¤¾åœ°å€ï¼šé•¿æ²™å¸‚èŠ™è“‰åŒºè§£æ”¾ä¸œè·¯300å· å…¬å¸æŠ•è¯‰ç”µè¯ï¼š0731-84153558<br>
-    å…¨çœç»Ÿä¸€æœåŠ¡çƒ­çº¿ï¼š<a href="tel:073155555555" class="link-color">0731â€“55555555</a> æ¹–å—çœæ—…æ¸¸å±€æŠ•è¯‰ç”µè¯ï¼š0731-84717614<br>
+	Copyright ? 2015 <a href="http://www.htyou.com" target="_blank" class="link-color">www.htyou.com</a>
+	ºşÄÏ»ªÌì¹ú¼ÊÂÃĞĞÉçÓĞÏŞÔğÈÎ¹«Ë¾°æÈ¨ËùÓĞ<br>
+	ÂÃĞĞÉçÒµÎñĞí¿ÉÖ¤±àºÅ£ºL-HUN-CJ00001 ÏæICP±¸12003410ºÅ<br>
+	¾­Óª·¶Î§£º¹úÄÚÂÃÓÎ¡¢Èë¾³ÂÃÓÎ¡¢³ö¾³ÂÃÓÎ ·¨¶¨´ú±íÈË£ºËï¸ùÊ¯<br>
+	ºşÄÏ»ªÌìÂÃĞĞÉçµØÖ·£º³¤É³ÊĞÜ½ÈØÇø½â·Å¶«Â·300ºÅ ¹«Ë¾Í¶Ëßµç»°£º0731-84153558<br>
+	È«Ê¡Í³Ò»·şÎñÈÈÏß£º<a href="tel:073155555555" class="link-color">0731¨C55555555</a> ºşÄÏÊ¡ÂÃÓÎ¾ÖÍ¶Ëßµç»°£º0731-84717614<br>
 </div>
-<!--/å…¬å…±Footer-->
+<!--/¹«¹²Footer-->
 
 
 <script>
-    $(document).ready(function () {
-        var onNavUnit = false;
-        var onDataPanel = false;
-        //å¯¼èˆªæ¡èœå•è§¦å‘å‡½æ•°
-        $('#nav-panel').delegate('.nav-unit', 'mouseover', function () {
-            $('.data-panel').hide();    //éšè—è€çš„ä¸‹æ»‘èœå•
-            var panelLeft = $(this).position().left;
-            var panelTop = $(this).position().top + $(this).height() - 5;
-            $(this).css({'z-index': '9'});
-            //å®šä½ä¸‹æ»‘èœå•çš„é¢æ¿
-            $('.data-panel[keyword='+$(this).text()+']').css({
-                /*'opacity':'10', */
-                'left': panelLeft,
-                'top': panelTop
-            }).show()/*.animate({/!*'opacity':'10',*!//!*'left':panelLeft,*!/'top':panelTop},200)*/;
-            onNavUnit = true;
-        }).delegate('.nav-unit', 'mouseout', function () {
-            onNavUnit = false;
-            doDatapanelClose();
-        });
-        $('#nav-panel').delegate('.data-panel', 'mouseover', function () {
-            onDataPanel = true;
-        }).delegate('.data-panel', 'mouseout', function () {
-            onDataPanel = false;
-            doDatapanelClose();
-        });
-        function doDatapanelClose() {
-            //console.log(onNavUnit, onDataPanel);
-            window.setTimeout(function () {
-                if (!onNavUnit && !onDataPanel) {
-                    $('.data-panel').hide();
-                }
-            }, 3000);
-        }
+	$(document).ready(function () {
+		var onNavUnit = false;
+		var onDataPanel = false;
+		//µ¼º½Ìõ²Ëµ¥´¥·¢º¯Êı
+		$('#nav-panel').delegate('.nav-unit', 'mouseover', function () {
+			$('.data-panel').hide();    //Òş²ØÀÏµÄÏÂ»¬²Ëµ¥
+			var panelLeft = $(this).position().left;
+			var panelTop = $(this).position().top + $(this).height() - 5;
+			$(this).css({'z-index': '9'});
+			//¶¨Î»ÏÂ»¬²Ëµ¥µÄÃæ°å
+			$('.data-panel[keyword='+$(this).text()+']').css({
+				/*'opacity':'10', */
+				'left': panelLeft,
+				'top': panelTop
+			}).show()/*.animate({/!*'opacity':'10',*!//!*'left':panelLeft,*!/'top':panelTop},200)*/;
+			onNavUnit = true;
+		}).delegate('.nav-unit', 'mouseout', function () {
+			onNavUnit = false;
+			doDatapanelClose();
+		});
+		$('#nav-panel').delegate('.data-panel', 'mouseover', function () {
+			onDataPanel = true;
+		}).delegate('.data-panel', 'mouseout', function () {
+			onDataPanel = false;
+			doDatapanelClose();
+		});
+		function doDatapanelClose() {
+			//console.log(onNavUnit, onDataPanel);
+			window.setTimeout(function () {
+				if (!onNavUnit && !onDataPanel) {
+					$('.data-panel').hide();
+				}
+			}, 3000);
+		}
 
-        //è¡¨æ ¼å½“å‰è¡Œé«˜äº®
-        $('#list-table').delegate('td', 'mouseover', function(){
-            $('#list-table tr.hover').removeClass('hover');
-            $(this).parent().addClass('hover');
-        });
+		//±í¸ñµ±Ç°ĞĞ¸ßÁÁ
+		$('#list-table').delegate('td', 'mouseover', function(){
+			$('#list-table tr.hover').removeClass('hover');
+			$(this).parent().addClass('hover');
+		});
 
-    });
+	});
 </script>
 
 </body>

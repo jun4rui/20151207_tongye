@@ -1,450 +1,450 @@
 <!DOCTYPE html>
 <html lang="zh_CN">
 <head>
-    <meta charset="UTF-8">
-    <title>Â§ßÊ≠•ÊóÖË°å</title>
-    <script src="jquery-1.11.0.min.js"></script>
-    <script src="avalon.js"></script>
-    <script src="common.js"></script>
-    <link rel="stylesheet" href="common.css">
-    <style>
-        body {
-            padding: 0;
-            margin: 0;
-            background-color: #FFFFFF;
-            color: #404040;
-            font: 12px/1.5 "Microsoft YaHei", Arial;
-        }
+	<meta charset="GBK">
+	<title>¥Û≤Ω¬√––</title>
+	<script src="jquery-1.11.0.min.js"></script>
+	<script src="avalon.js"></script>
+	<script src="common.js"></script>
+	<link rel="stylesheet" href="common.css">
+	<style>
+		body {
+			padding: 0;
+			margin: 0;
+			background-color: #FFFFFF;
+			color: #404040;
+			font: 12px/1.5 "Microsoft YaHei", Arial;
+		}
 
-        img {
-            display: block;
-            border:0;
-        }
+		img {
+			display: block;
+			border:0;
+		}
 
-        a {
-            text-decoration: none;
-        }
+		a {
+			text-decoration: none;
+		}
 
-        ul, li {
-            padding: 0;
-            margin: 0;
-            list-style-type: none;
-        }
+		ul, li {
+			padding: 0;
+			margin: 0;
+			list-style-type: none;
+		}
 
-        .clear {
-            clear: both;
-        }
+		.clear {
+			clear: both;
+		}
 
-        .ty-width {
-            width: 1000px;
-            margin: 0 auto;
-        }
+		.ty-width {
+			width: 1000px;
+			margin: 0 auto;
+		}
 
-        #top-info-panel {
-            height: 30px;
-            line-height: 45px;
-        }
+		#top-info-panel {
+			height: 30px;
+			line-height: 45px;
+		}
 
-        #navsection {
-            width: 100%;
+		#navsection {
+			width: 100%;
 			background-image: url(data:image/gif;base64,R0lGODlhAQA5ALMAAPz8/Pb29vT09PPz8/Ly8vHx8fDw8O/v7+7u7uLh4SWIowAAAAAAAAAAAAAAAAAAACH5BAAHAP8ALAAAAAABADkAAAQQUEkQqg0j6807N2AojmISAQA7);
-        }
+		}
 
-        #nav-panel {
-            height: 57px;
-            position: relative;
-        }
+		#nav-panel {
+			height: 57px;
+			position: relative;
+		}
 
-        #nav-panel .nav-unit {
-            height: 54px;
-            border-top: 3px solid #2689a5;
-            /*display:inline;*/
-            float: left;
-            padding: 0 1em;
-            font-size: 16px;
-            line-height: 54px;
-            cursor: pointer;
-        }
+		#nav-panel .nav-unit {
+			height: 54px;
+			border-top: 3px solid #2689a5;
+			/*display:inline;*/
+			float: left;
+			padding: 0 1em;
+			font-size: 16px;
+			line-height: 54px;
+			cursor: pointer;
+		}
 
-        .nav-unit a {
-            color: #404040;
-        }
+		.nav-unit a {
+			color: #404040;
+		}
 
-        #nav-panel .nav-unit:hover {
-            border-top: 3px solid #2ac7e5;
-            background-color: #FFF;
-        }
+		#nav-panel .nav-unit:hover {
+			border-top: 3px solid #2ac7e5;
+			background-color: #FFF;
+		}
 
-    </style>
-    <script>
-        avalon.ready(function () {
-            //ÂÖ®Â±ÄVM
-            var navVM = avalon.define({
-                $id: 'nav',
-                list: []
-            });
+	</style>
+	<script>
+		avalon.ready(function () {
+			//»´æ÷VM
+			var navVM = avalon.define({
+				$id: 'nav',
+				list: []
+			});
 
-            var dataVM = avalon.define({
-                $id: 'data',
-                list: []
-            });
+			var dataVM = avalon.define({
+				$id: 'data',
+				list: []
+			});
 
-            avalon.scan();
+			avalon.scan();
 
-            $.getJSON('http://www.htyou.com/common/websinfo_queryHTClass.action?datatype=json&classId=728&jsoncallback=?', function (result) {
-                navVM.list = result[0].notes.split(' ');
-                //console.log(result, list);
-            }).done(function() {
-                //console.log('done');
-                for (var i = 0; i < navVM.list.length; i++) {
-                    $.getJSON('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + encodeURI(navVM.list[i]), function (result) {
-                        if (result.value != null) {
-                            dataVM.list.push(result);
-                        }
-                    });
-                }
-            });
-        });
-    </script>
+			$.getJSON('http://www.htyou.com/common/websinfo_queryHTClass.action?datatype=json&classId=728&jsoncallback=?', function (result) {
+				navVM.list = result[0].notes.split(' ');
+				//console.log(result, list);
+			}).done(function() {
+				//console.log('done');
+				for (var i = 0; i < navVM.list.length; i++) {
+					$.getJSON('http://www.htyou.com/mobile/ipad_queryTourLine.action?jsoncallback=?&featured=%E5%90%8C%E8%A1%8C&KeyWords=' + encodeURI(navVM.list[i]), function (result) {
+						if (result.value != null) {
+							dataVM.list.push(result);
+						}
+					});
+				}
+			});
+		});
+	</script>
 </head>
 <body>
-<!--È°∂ÈÉ®‰ø°ÊÅØÊ†è-->
+<!--∂•≤ø–≈œ¢¿∏-->
 <div id="top-info-panel" class="ty-width">
-    ÊÇ®ÁöÑÂÖ®ÁêÉÊóÖÊ∏∏È°æÈóÆ,ÂçéÂ§©ÂõΩÊóÖÊ¨¢ËøéÊÇ®!
+	ƒ˙µƒ»´«Ú¬√”ŒπÀŒ ,ª™ÃÏπ˙¬√ª∂”≠ƒ˙!
 </div>
-<!--/È°∂ÈÉ®‰ø°ÊÅØÊ†è-->
+<!--/∂•≤ø–≈œ¢¿∏-->
 <!--<div ms-controller="data">-->
-    <!--<li ms-repeat-unit="list">-->
-        <!--<h2>{{list.index}}</h2>-->
-        <!--<a href="#" ms-repeat-sunit="unit.value">{{sunit[0]}}</a>-->
-    <!--</li>-->
+<!--<li ms-repeat-unit="list">-->
+<!--<h2>{{list.index}}</h2>-->
+<!--<a href="#" ms-repeat-sunit="unit.value">{{sunit[0]}}</a>-->
+<!--</li>-->
 <!--</div>-->
-<!--È°∂ÈÉ®ËèúÂçï-->
+<!--∂•≤ø≤Àµ•-->
 <div id="navsection" ms-controller="data">
-    <div id="nav-panel" class="ty-width">
-        <ul ms-controller="nav">
-            <li class="nav-unit"><a href="tongye.html">È¶ñÈ°µ</a></li>
-            <li class="nav-unit" ms-repeat-unit="list">
-                <a ms-attr-href="detail.html?itemid={{unit}}">{{unit}}</a>
-            </li>
-            <li class="nav-unit"><a href="#">ÂÖ≥‰∫éÊàë‰ª¨</a></li>
-        </ul>
-        <!--ËèúÂçïÊï∞ÊçÆÂå∫-->
-        <style>
-            .data-panel {
-                position: absolute;
-                z-index: 2;
-                width: 400px;
-                padding: 2em 1em;
-                height: auto;
-                border: 1px solid #DFDFDF;
-                background-color: #FFF;
-                box-shadow: 5px 5px 15px #999;
-                display: none;
-                border-radius: 5px;
-            }
+	<div id="nav-panel" class="ty-width">
+		<ul ms-controller="nav">
+			<li class="nav-unit"><a href="tongye.html"> ◊“≥</a></li>
+			<li class="nav-unit" ms-repeat-unit="list">
+				<a ms-attr-href="detail.html?itemid={{unit}}">{{unit}}</a>
+			</li>
+			<li class="nav-unit"><a href="#">πÿ”⁄Œ“√«</a></li>
+		</ul>
+		<!--≤Àµ• ˝æ›«¯-->
+		<style>
+			.data-panel {
+				position: absolute;
+				z-index: 2;
+				width: 400px;
+				padding: 2em 1em;
+				height: auto;
+				border: 1px solid #DFDFDF;
+				background-color: #FFF;
+				box-shadow: 5px 5px 15px #999;
+				display: none;
+				border-radius: 5px;
+			}
 
-            .data-panel a {
-                display: block;
-                font: 16px/2 'Microsoft YaHei', Arial;
-                color: #555;
-                border-bottom: 1px dashed #B7B4B4;
-            }
+			.data-panel a {
+				display: block;
+				font: 16px/2 'Microsoft YaHei', Arial;
+				color: #555;
+				border-bottom: 1px dashed #B7B4B4;
+			}
 
-            .data-panel a:hover {
-                color: #F60;
-                /*background-color: #CCCCCC;*/
-                border-bottom:1px dashed #F60;
-            }
+			.data-panel a:hover {
+				color: #F60;
+				/*background-color: #CCCCCC;*/
+				border-bottom:1px dashed #F60;
+			}
 
-            .data-panel .up-arrow {
-                width: 15px;
-                height: 15px;
-                z-index: 3;
-                position: absolute;
-                top: -14px;
-                left: 1.5em;
-            }
+			.data-panel .up-arrow {
+				width: 15px;
+				height: 15px;
+				z-index: 3;
+				position: absolute;
+				top: -14px;
+				left: 1.5em;
+			}
 
-        </style>
-        <div class="data-panel" ms-repeat="list" ms-attr-keyword="{{el.value2.KeyWords}}">
-            <img src="images/icon_arrow.gif" alt="" class="up-arrow">
-            <a ms-attr-href="detail.html?itemid={{el.value2.KeyWords}}&lineid={{elem.lineid}}" ms-repeat-elem="el.value">{{elem.tourproname}}</a>
-        </div>
-        <!--/ËèúÂçïÊï∞ÊçÆÂå∫-->
-    </div>
+		</style>
+		<div class="data-panel" ms-repeat="list" ms-attr-keyword="{{el.value2.KeyWords}}">
+			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
+			<a ms-attr-href="detail.html?itemid={{el.value2.KeyWords}}&lineid={{elem.lineid}}" ms-repeat-elem="el.value">{{elem.tourproname}}</a>
+		</div>
+		<!--/≤Àµ• ˝æ›«¯-->
+	</div>
 </div>
-<!--/È°∂ÈÉ®ËèúÂçï-->
-<!--È°∂ÈÉ®Banner-->
+<!--/∂•≤ø≤Àµ•-->
+<!--∂•≤øBanner-->
 <style>
-    #top-banner-section {
-        width: 100%;
-        height: 190px;
-        border-bottom: 1px solid #CCC;
-        box-shadow: 0 1px 3px #CCC;
-    }
+	#top-banner-section {
+		width: 100%;
+		height: 190px;
+		border-bottom: 1px solid #CCC;
+		box-shadow: 0 1px 3px #CCC;
+	}
 
-    #top-banner-section > img {
-        margin: 0 auto;
-        width: 1000px;
-        height: 190px;
-    }
+	#top-banner-section > img {
+		margin: 0 auto;
+		width: 1000px;
+		height: 190px;
+	}
 </style>
 <div id="top-banner-section">
-    <img src="./images/banner.jpg" alt="">
+	<img src="./images/banner.jpg" alt="">
 </div>
-<!--/È°∂ÈÉ®Banner-->
-<!--‰∏äÈÉ®ÂèØÊªöÂä®Gallery-->
+<!--/∂•≤øBanner-->
+<!--…œ≤øø…πˆ∂ØGallery-->
 <style>
-    #gallery {
-        margin: 10px auto 0 auto;
-        width: 1000px;
-        height: 378px;
-        position: relative;
-    }
+	#gallery {
+		margin: 10px auto 0 auto;
+		width: 1000px;
+		height: 378px;
+		position: relative;
+	}
 
-    #gallery .bigpic-panel {
-        width: 1000px;
-        height: 378px;
-    }
+	#gallery .bigpic-panel {
+		width: 1000px;
+		height: 378px;
+	}
 
-    #gallery .bigpic-panel a img {
-        width: 1000px;
-        height: 378px;
-    }
+	#gallery .bigpic-panel a img {
+		width: 1000px;
+		height: 378px;
+	}
 
-    #gallery .topic-panel {
-        position: absolute;
-        width: 1000px;
-        height: 20px;
-        bottom: 20px;
-        left: 0;
-        text-align: center;
+	#gallery .topic-panel {
+		position: absolute;
+		width: 1000px;
+		height: 20px;
+		bottom: 20px;
+		left: 0;
+		text-align: center;
 
-    }
+	}
 
-    .topic-panel .gallery-unit {
-        width: 12px;
-        height: 12px;
-        display: inline-block;
-        border: 1px solid #e5e5e5;
-        background-color: #FFF;
-        cursor: pointer;
-        margin: auto 2px;
+	.topic-panel .gallery-unit {
+		width: 12px;
+		height: 12px;
+		display: inline-block;
+		border: 1px solid #e5e5e5;
+		background-color: #FFF;
+		cursor: pointer;
+		margin: auto 2px;
 
-        *display: inline;
-        zoom: 1;
-    }
+		*display: inline;
+		zoom: 1;
+	}
 
-    .topic-panel .gallery-unit.active {
-        border: 1px solid #e5e5e5;
-        background-color: #FF6600;
-    }
+	.topic-panel .gallery-unit.active {
+		border: 1px solid #e5e5e5;
+		background-color: #FF6600;
+	}
 </style>
 <div id="gallery">
-    <div class="bigpic-panel">
-        <a href="#">
-            <img src="http://www.htyou.com/pic/adpic/2015-12-02_15-31-45_0843.jpg" alt="">
-        </a>
-    </div>
-    <div class="topic-panel">
-        <div class="topic-unit gallery-unit active" pic="pic/adpic/2015-12-02_15-31-45_0843.jpg"
-             link="/tour/type/month/keywordÂè∞Êπæ_ÂåÖÊú∫.htm"></div>
-        <div class="topic-unit gallery-unit" pic="pic/adpic/2015-12-14_09-12-11_8486.jpg"
-             link="/tour/type/month/keywordÈïøÊª©.htm"></div>
-        <div class="topic-unit gallery-unit" pic="pic/adpic/2015-11-26_09-25-35_9743.jpg"
-             link="/tour/tourbrowse/10603.htm"></div>
-        <div class="topic-unit gallery-unit" pic="pic/adpic/2015-11-09_16-37-14_1746.jpg"
-             link="/tour/tourbrowse/10466.htm"></div>
-        <div class="topic-unit gallery-unit" pic="pic/adpic/2015-05-05_10-11-08_2130.jpg"
-             link="/tour/type/month/keywordÈü©ÂõΩ.htm"></div>
-    </div>
+	<div class="bigpic-panel">
+		<a href="#">
+			<img src="http://www.htyou.com/pic/adpic/2015-12-02_15-31-45_0843.jpg" alt="">
+		</a>
+	</div>
+	<div class="topic-panel">
+		<div class="topic-unit gallery-unit active" pic="pic/adpic/2015-12-02_15-31-45_0843.jpg"
+			 link="/tour/type/month/keywordÃ®ÕÂ_∞¸ª˙.htm"></div>
+		<div class="topic-unit gallery-unit" pic="pic/adpic/2015-12-14_09-12-11_8486.jpg"
+			 link="/tour/type/month/keyword≥§Ã≤.htm"></div>
+		<div class="topic-unit gallery-unit" pic="pic/adpic/2015-11-26_09-25-35_9743.jpg"
+			 link="/tour/tourbrowse/10603.htm"></div>
+		<div class="topic-unit gallery-unit" pic="pic/adpic/2015-11-09_16-37-14_1746.jpg"
+			 link="/tour/tourbrowse/10466.htm"></div>
+		<div class="topic-unit gallery-unit" pic="pic/adpic/2015-05-05_10-11-08_2130.jpg"
+			 link="/tour/type/month/keyword∫´π˙.htm"></div>
+	</div>
 </div>
-<!--/‰∏äÈÉ®ÂèØÊªöÂä®Gallery-->
-<!--‰∫ßÂìÅÂàóË°®-->
+<!--/…œ≤øø…πˆ∂ØGallery-->
+<!--≤˙∆∑¡–±Ì-->
 <style>
-    .product-list {
-        margin-top: 15px;
-    }
+	.product-list {
+		margin-top: 15px;
+	}
 
-    .product-list .title {
-        width: 100%;
-        height: 28px;
-        line-height: 28px;
-        border-left: 4px solid #54a1c1;
-        position: relative;
-        color: #555;
-        font-size: 16px;
-        margin-bottom: 5px;
-    }
+	.product-list .title {
+		width: 100%;
+		height: 28px;
+		line-height: 28px;
+		border-left: 4px solid #54a1c1;
+		position: relative;
+		color: #555;
+		font-size: 16px;
+		margin-bottom: 5px;
+	}
 
-    .product-list .title h2 {
-        color: #54a1c1;
-        display: inline;
-        padding: 0 10px;
-    }
+	.product-list .title h2 {
+		color: #54a1c1;
+		display: inline;
+		padding: 0 10px;
+	}
 
-    .product-list .title span {
-        font-size: 16px;
-        line-height: 28px;
-    }
+	.product-list .title span {
+		font-size: 16px;
+		line-height: 28px;
+	}
 
-    .product-list .title .morelink {
-        position: absolute;
-        right: 5px;
-        bottom: 3px;
-        color: #555;
-        line-height: 100%;
-    }
+	.product-list .title .morelink {
+		position: absolute;
+		right: 5px;
+		bottom: 3px;
+		color: #555;
+		line-height: 100%;
+	}
 
-    .product-list ul {
-        width: 1020px;
-    }
+	.product-list ul {
+		width: 1020px;
+	}
 
-    .product-list li {
-        width: 233px;
-        height: 174px;
-        /* padding: 5px; */
-        float: left;
-        margin-right: 20px;
-        margin-bottom: 15px;
-        /* border: 1px solid #E5E5E5; */
-        background-color: #F5F5F5;
-        overflow:hidden;
-        position: relative;
-    }
+	.product-list li {
+		width: 233px;
+		height: 174px;
+		/* padding: 5px; */
+		float: left;
+		margin-right: 20px;
+		margin-bottom: 15px;
+		/* border: 1px solid #E5E5E5; */
+		background-color: #F5F5F5;
+		overflow:hidden;
+		position: relative;
+	}
 
-    .product-list li img {
-        width: 233px;
-        height: 126px;
-        margin: 0 auto;
-    }
+	.product-list li img {
+		width: 233px;
+		height: 126px;
+		margin: 0 auto;
+	}
 
-    .product-list li a {
-        color: #555;
-        font-size: 16px;
-    }
-    .product-list>ul>li>span {
-        position: absolute;
-        right:0;
-        top:105px;
-        background:#2b2b2b;
-        padding:0 .5em;
-        color:#FFFF00;
-        font-size:14px;
-    }
+	.product-list li a {
+		color: #555;
+		font-size: 16px;
+	}
+	.product-list>ul>li>span {
+		position: absolute;
+		right:0;
+		top:105px;
+		background:#2b2b2b;
+		padding:0 .5em;
+		color:#FFFF00;
+		font-size:14px;
+	}
 
 </style>
 
 <div ms-controller="data">
-<!--‰∫ßÂìÅÂàóË°®Ê®°Âùó-->
-<div class="ty-width product-list" ms-repeat="list">
-    <div class="title">
-        <h2>{{el.value2.KeyWords}}</h2><span>‰∫ßÂìÅÂàóË°®</span>
-        <a ms-attr-href="detail.html?itemid={{el.value2.KeyWords}}" class="morelink">Êü•ÁúãÊõ¥Â§ö</a>
-    </div>
-    <ul>
-        <li ms-repeat-elem="el.value">
-            <a ms-attr-href="detail.html?itemid={{el.value2.KeyWords}}&lineid={{elem.lineid}}" ms-attr-title="{{elem.tourproname}}" target="_blank">
-                <img ms-attr-src="http://www.htyou.com/{{elem.spotviewpic}}" ms-attr-alt="{{elem.tourproname}}">
-                {{elem.tourproname}}
-            </a>
-            <span>{{elem.leastprice}}ÂÖÉ</span>
-        </li>
-    </ul>
-    <div class="clear"></div>
-</div>
-<!--/‰∫ßÂìÅÂàóË°®Ê®°Âùó-->
+	<!--≤˙∆∑¡–±Ìƒ£øÈ-->
+	<div class="ty-width product-list" ms-repeat="list">
+		<div class="title">
+			<h2>{{el.value2.KeyWords}}</h2><span>≤˙∆∑¡–±Ì</span>
+			<a ms-attr-href="detail.html?itemid={{el.value2.KeyWords}}" class="morelink">≤Èø¥∏¸∂‡</a>
+		</div>
+		<ul>
+			<li ms-repeat-elem="el.value">
+				<a ms-attr-href="detail.html?itemid={{el.value2.KeyWords}}&lineid={{elem.lineid}}" ms-attr-title="{{elem.tourproname}}" target="_blank">
+					<img ms-attr-src="http://www.htyou.com/{{elem.spotviewpic}}" ms-attr-alt="{{elem.tourproname}}">
+					{{elem.tourproname}}
+				</a>
+				<span>{{elem.leastprice}}‘™</span>
+			</li>
+		</ul>
+		<div class="clear"></div>
+	</div>
+	<!--/≤˙∆∑¡–±Ìƒ£øÈ-->
 </div>
 
 
-<!--‰æßËæπÊ†è-->
-<!--ÂÖ¨ÂÖ±Footer-->
+<!--≤‡±ﬂ¿∏-->
+<!--π´π≤Footer-->
 <style>
-    #footer {
-        padding: 20px 20px;
-        color: #e5e5e5;
-        text-align: center;
-        line-height: 220%;
-        font-family: 'Arial';
-        width: 100%;
-        margin: 0 auto;
-        display: block;
+	#footer {
+		padding: 20px 20px;
+		color: #e5e5e5;
+		text-align: center;
+		line-height: 220%;
+		font-family: 'Arial';
+		width: 100%;
+		margin: 0 auto;
+		display: block;
 		background-image: url(data:image/gif;base64,R0lGODlhegCLALMAAFxcXFRUVF1dXV5eXl9fX2BgYGFhYVVVVVtbW1paWlZWVllZWVdXV1hYWAAAAAAAACH/C1hNUCBEYXRhWE1QPD94cGFja2V0IGJlZ2luPSLvu78iIGlkPSJXNU0wTXBDZWhpSHpyZVN6TlRjemtjOWQiPz4gPHg6eG1wbWV0YSB4bWxuczp4PSJhZG9iZTpuczptZXRhLyIgeDp4bXB0az0iQWRvYmUgWE1QIENvcmUgNS4wLWMwNjAgNjEuMTM0Nzc3LCAyMDEwLzAyLzEyLTE3OjMyOjAwICAgICAgICAiPiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPiA8cmRmOkRlc2NyaXB0aW9uIHJkZjphYm91dD0iIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtbG5zOnhtcE1NPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvbW0vIiB4bWxuczpzdFJlZj0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL3NUeXBlL1Jlc291cmNlUmVmIyIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M1IFdpbmRvd3MiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6QThFNDlCMjg4MTREMTFFMjk3NTBDQkY4QTkzMDE4NDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6QThFNDlCMjk4MTREMTFFMjk3NTBDQkY4QTkzMDE4NDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpBOEU0OUIyNjgxNEQxMUUyOTc1MENCRjhBOTMwMTg0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpBOEU0OUIyNzgxNEQxMUUyOTc1MENCRjhBOTMwMTg0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PgH//v38+/r5+Pf29fTz8vHw7+7t7Ovq6ejn5uXk4+Lh4N/e3dzb2tnY19bV1NPS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);
-        border-top: 1px solid #e5e5e5;
-    }
+		border-top: 1px solid #e5e5e5;
+	}
 
-    #footer a {
-        color: #FF0;
-    }
+	#footer a {
+		color: #FF0;
+	}
 </style>
 <div id="footer">
-    Copyright ¬© 2015 <a href="http://www.htyou.com" target="_blank" class="link-color">www.htyou.com</a>
-    ÊπñÂçóÂçéÂ§©ÂõΩÈôÖÊóÖË°åÁ§æÊúâÈôêË¥£‰ªªÂÖ¨Âè∏ÁâàÊùÉÊâÄÊúâ<br>
-    ÊóÖË°åÁ§æ‰∏öÂä°ËÆ∏ÂèØËØÅÁºñÂè∑ÔºöL-HUN-CJ00001 ÊπòICPÂ§á12003410Âè∑<br>
-    ÁªèËê•ËåÉÂõ¥ÔºöÂõΩÂÜÖÊóÖÊ∏∏„ÄÅÂÖ•Â¢ÉÊóÖÊ∏∏„ÄÅÂá∫Â¢ÉÊóÖÊ∏∏ Ê≥ïÂÆö‰ª£Ë°®‰∫∫ÔºöÂ≠ôÊ†πÁü≥<br>
-    ÊπñÂçóÂçéÂ§©ÊóÖË°åÁ§æÂú∞ÂùÄÔºöÈïøÊ≤ôÂ∏ÇËäôËìâÂå∫Ëß£Êîæ‰∏úË∑Ø300Âè∑ ÂÖ¨Âè∏ÊäïËØâÁîµËØùÔºö0731-84153558<br>
-    ÂÖ®ÁúÅÁªü‰∏ÄÊúçÂä°ÁÉ≠Á∫øÔºö<a href="tel:073155555555" class="link-color">0731‚Äì55555555</a> ÊπñÂçóÁúÅÊóÖÊ∏∏Â±ÄÊäïËØâÁîµËØùÔºö0731-84717614<br>
+	Copyright ? 2015 <a href="http://www.htyou.com" target="_blank" class="link-color">www.htyou.com</a>
+	∫˛ƒœª™ÃÏπ˙º ¬√––…Á”–œﬁ‘»Œπ´Àæ∞Ê»®À˘”–<br>
+	¬√––…Á“µŒÒ–Ìø…÷§±‡∫≈£∫L-HUN-CJ00001 œÊICP±∏12003410∫≈<br>
+	æ≠”™∑∂Œß£∫π˙ƒ⁄¬√”Œ°¢»Îæ≥¬√”Œ°¢≥ˆæ≥¬√”Œ ∑®∂®¥˙±Ì»À£∫ÀÔ∏˘ Ø<br>
+	∫˛ƒœª™ÃÏ¬√––…Áµÿ÷∑£∫≥§…≥ –‹Ω»ÿ«¯Ω‚∑≈∂´¬∑300∫≈ π´ÀæÕ∂ÀﬂµÁª∞£∫0731-84153558<br>
+	»´ °Õ≥“ª∑˛ŒÒ»»œﬂ£∫<a href="tel:073155555555" class="link-color">0731®C55555555</a> ∫˛ƒœ °¬√”Œæ÷Õ∂ÀﬂµÁª∞£∫0731-84717614<br>
 </div>
-<!--/ÂÖ¨ÂÖ±Footer-->
+<!--/π´π≤Footer-->
 
 
 <script>
-    $(document).ready(function () {
-        var onNavUnit = false;
-        var onDataPanel = false;
-        //ÂØºËà™Êù°ËèúÂçïËß¶ÂèëÂáΩÊï∞
-        $('#nav-panel').delegate('.nav-unit', 'mouseover', function () {
-            $('.data-panel').hide();    //ÈöêËóèËÄÅÁöÑ‰∏ãÊªëËèúÂçï
-            var panelLeft = $(this).position().left;
-            var panelTop = $(this).position().top + $(this).height() - 5;
-            $(this).css({'z-index': '9'});
-            //ÂÆö‰Ωç‰∏ãÊªëËèúÂçïÁöÑÈù¢Êùø
-            $('.data-panel[keyword='+$(this).text()+']').css({
-                /*'opacity':'10', */
-                'left': panelLeft,
-                'top': panelTop
-            }).show()/*.animate({/!*'opacity':'10',*!//!*'left':panelLeft,*!/'top':panelTop},200)*/;
-            onNavUnit = true;
-        }).delegate('.nav-unit', 'mouseout', function () {
-            onNavUnit = false;
-            doDatapanelClose();
-        });
-        $('#nav-panel').delegate('.data-panel', 'mouseover', function () {
-            onDataPanel = true;
-        }).delegate('.data-panel', 'mouseout', function () {
-            onDataPanel = false;
-            doDatapanelClose();
-        });
-        function doDatapanelClose() {
-            //console.log(onNavUnit, onDataPanel);
-            window.setTimeout(function () {
-                if (!onNavUnit && !onDataPanel) {
-                    $('.data-panel').hide();
-                }
-            }, 3000);
-        }
+	$(document).ready(function () {
+		var onNavUnit = false;
+		var onDataPanel = false;
+		//µº∫ΩÃı≤Àµ•¥•∑¢∫Ø ˝
+		$('#nav-panel').delegate('.nav-unit', 'mouseover', function () {
+			$('.data-panel').hide();    //“˛≤ÿ¿œµƒœ¬ª¨≤Àµ•
+			var panelLeft = $(this).position().left;
+			var panelTop = $(this).position().top + $(this).height() - 5;
+			$(this).css({'z-index': '9'});
+			//∂®Œªœ¬ª¨≤Àµ•µƒ√Ê∞Â
+			$('.data-panel[keyword='+$(this).text()+']').css({
+				/*'opacity':'10', */
+				'left': panelLeft,
+				'top': panelTop
+			}).show()/*.animate({/!*'opacity':'10',*!//!*'left':panelLeft,*!/'top':panelTop},200)*/;
+			onNavUnit = true;
+		}).delegate('.nav-unit', 'mouseout', function () {
+			onNavUnit = false;
+			doDatapanelClose();
+		});
+		$('#nav-panel').delegate('.data-panel', 'mouseover', function () {
+			onDataPanel = true;
+		}).delegate('.data-panel', 'mouseout', function () {
+			onDataPanel = false;
+			doDatapanelClose();
+		});
+		function doDatapanelClose() {
+			//console.log(onNavUnit, onDataPanel);
+			window.setTimeout(function () {
+				if (!onNavUnit && !onDataPanel) {
+					$('.data-panel').hide();
+				}
+			}, 3000);
+		}
 
-        //GalleryÁÇπÂáªÂàáÊç¢ÂáΩÊï∞
-        $('.topic-panel').delegate('.topic-unit', 'click', function () {
-            $('.bigpic-panel').html('<a href="http://www.htyou.com' + $(this).attr('link') + '" target="_blank"><img src="http://www.htyou.com/' + $(this).attr('pic') + '" alt=""/></a>');
-            $('.topic-unit.active').removeClass('active');
-            $(this).addClass('active');
-        });
-        //GalleryËá™Âä®ÂàáÊç¢ÂáΩÊï∞
-        window.setInterval(function () {
-            //ÂèñÂæóÂΩìÂâçÊòØÁ¨¨Âá†‰∏™
-            var galleryIndex = $('.topic-unit.active').index();
-            var galleryLength = $('.topic-unit').length - 1;
-            //console.log(galleryIndex, galleryLength);
-            if (galleryIndex < galleryLength) {
-                $('.topic-unit').eq(galleryIndex + 1).click();
-            } else {
-                $('.topic-unit').eq(0).click();
-            }
-        }, 3000);
+		//Galleryµ„ª˜«–ªª∫Ø ˝
+		$('.topic-panel').delegate('.topic-unit', 'click', function () {
+			$('.bigpic-panel').html('<a href="http://www.htyou.com' + $(this).attr('link') + '" target="_blank"><img src="http://www.htyou.com/' + $(this).attr('pic') + '" alt=""/></a>');
+			$('.topic-unit.active').removeClass('active');
+			$(this).addClass('active');
+		});
+		//Gallery◊‘∂Ø«–ªª∫Ø ˝
+		window.setInterval(function () {
+			//»°µ√µ±«∞ «µ⁄º∏∏ˆ
+			var galleryIndex = $('.topic-unit.active').index();
+			var galleryLength = $('.topic-unit').length - 1;
+			//console.log(galleryIndex, galleryLength);
+			if (galleryIndex < galleryLength) {
+				$('.topic-unit').eq(galleryIndex + 1).click();
+			} else {
+				$('.topic-unit').eq(0).click();
+			}
+		}, 3000);
 
-    });
+	});
 </script>
 </body>
 </html>
