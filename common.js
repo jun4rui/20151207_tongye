@@ -31,4 +31,14 @@ function getParameterValue(inUrl/*输入Url*/, inName/*参数名*/){
     }
     return '';
 }
+
+//在页面底部右侧加入固定的在线客服QQ浮动条
+$(document).ready(function(){
+	$('body').append('' +
+		'<div id="help-panel" style="position:fixed; right:0; bottom:0; z-index:999;">' +
+			'<a href="http://wpa.qq.com/msgrd?v=3&uin=3094259501&site=qq&menu=yes" target="_blank"><img src="./images/help_qq.gif" alt=""></a>' +
+		'</div>'
+	);
+});
+
 //TEST: getParameterValue('http://www.htyou.com/index.html?q=北京&asdf=123&zxcv=123&a=fasdf','q');
