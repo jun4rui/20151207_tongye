@@ -19,4 +19,4 @@
 	> http://www.htyou.com/mobile/ipad_getTourTeam.action?lineid=22482
 	
 ## 部署
-目前部署在: ```/huatian/apache-tomcat-6.0.18-hebing/webapps/htonline-webroot/tongye``` 下
+目前部署在: ```/huatian/apache-tomcat-6.0.18-hebing/webapps/tongye``` 下
