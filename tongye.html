@@ -2,6 +2,7 @@
 <html lang="zh_CN">
 <head>
 	<meta charset="GBK">
+	<meta http-equiv="x-ua-compatible" content="IE=7">
 	<title>大步旅行</title>
 	<script src="jquery-1.11.0.min.js"></script>
 	<script src="avalon.js"></script>
@@ -110,7 +111,7 @@
 <body>
 <!--顶部信息栏-->
 <div id="top-info-panel" class="ty-width">
-	您的全球旅游顾问,华天国旅欢迎您!
+	您的全球旅游顾问,大步旅行欢迎您!
 </div>
 <!--/顶部信息栏-->
 <!--<div ms-controller="data">-->
@@ -120,12 +121,12 @@
 <!--</li>-->
 <!--</div>-->
 <!--顶部菜单-->
-<div id="navsection" ms-controller="data">
+<div id="navsection" ms-controller="data" class="ms-controller">
 	<div id="nav-panel" class="ty-width">
-		<ul ms-controller="nav">
+		<ul ms-controller="nav" class="ms-controller">
 			<li class="nav-unit"><a href="tongye.html">首页</a></li>
 			<li class="nav-unit" ms-repeat-unit="list">
-				<a ms-attr-href="detail.html?itemid={{unit}}">{{unit}}</a>
+				<a ms-attr-href="detail.html?itemid={{encodeURI(unit)}}">{{unit}}</a>
 			</li>
 			<li class="nav-unit"><a href="#">关于我们</a></li>
 		</ul>
@@ -169,7 +170,7 @@
 		</style>
 		<div class="data-panel" ms-repeat="list" ms-attr-keyword="{{el.value2.KeyWords}}">
 			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
-			<a ms-attr-href="detail.html?itemid={{el.value2.KeyWords}}&lineid={{elem.lineid}}" ms-repeat-elem="el.value">{{elem.tourproname}}</a>
+			<a ms-attr-href="detail.html?itemid={{encodeURI(el.value2.KeyWords)}}&lineid={{elem.lineid}}" ms-repeat-elem="el.value">{{elem.tourproname}}</a>
 		</div>
 		<!--/菜单数据区-->
 	</div>
@@ -336,16 +337,16 @@
 
 </style>
 
-<div ms-controller="data">
+<div ms-controller="data" class="ms-controller">
 	<!--产品列表模块-->
 	<div class="ty-width product-list" ms-repeat="list">
 		<div class="title">
 			<h2>{{el.value2.KeyWords}}</h2><span>产品列表</span>
-			<a ms-attr-href="detail.html?itemid={{el.value2.KeyWords}}" class="morelink">查看更多</a>
+			<a ms-attr-href="detail.html?itemid={{encodeURI(el.value2.KeyWords)}}" class="morelink">查看更多</a>
 		</div>
 		<ul>
 			<li ms-repeat-elem="el.value">
-				<a ms-attr-href="detail.html?itemid={{el.value2.KeyWords}}&lineid={{elem.lineid}}" ms-attr-title="{{elem.tourproname}}" target="_blank">
+				<a ms-attr-href="detail.html?itemid={{encodeURI(el.value2.KeyWords)}}&lineid={{elem.lineid}}" ms-attr-title="{{elem.tourproname}}" target="_blank">
 					<img ms-attr-src="http://www.htyou.com/{{elem.spotviewpic}}" ms-attr-alt="{{elem.tourproname}}">
 					{{elem.tourproname}}
 				</a>
@@ -379,12 +380,12 @@
 	}
 </style>
 <div id="footer">
-	Copyright ? 2015 <a href="http://www.htyou.com" target="_blank" class="link-color">www.htyou.com</a>
-	湖南华天国际旅行社有限责任公司版权所有<br>
-	旅行社业务许可证编号：L-HUN-CJ00001 湘ICP备12003410号<br>
-	经营范围：国内旅游、入境旅游、出境旅游 法定代表人：孙根石<br>
-	湖南华天旅行社地址：长沙市芙蓉区解放东路300号 公司投诉电话：0731-84153558<br>
-	全省统一服务热线：<a href="tel:073155555555" class="link-color">0731–55555555</a> 湖南省旅游局投诉电话：0731-84717614<br>
+	<!--Copyright@2015 <a href="http://www.htyou.com" target="_blank" class="link-color">www.htyou.com</a>-->
+	Copyright&copy;大步旅行版权所有 2016<br>
+	<!--旅行社业务许可证编号：L-HUN-CJ00001 湘ICP备12003410号<br>-->
+	<!--经营范围：国内旅游、入境旅游、出境旅游 法定代表人：孙根石<br>-->
+	<!--湖南华天旅行社地址：长沙市芙蓉区解放东路300号 公司投诉电话：0731-84153558<br>-->
+	<!--全省统一服务热线：<a href="tel:073155555555" class="link-color">0731–55555555</a> 湖南省旅游局投诉电话：0731-84717614<br>-->
 </div>
 <!--/公共Footer-->
 
