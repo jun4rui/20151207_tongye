@@ -72,7 +72,7 @@
 			if ( $('#password').val()=='' ){
 				alert('请输入密码后重新登陆！');
 			}else {
-				console.log('http://www.htyou.com/user/user_login.action?jsoncallback=?&code=lyfx&userPassword=' + $('#password').val() + '&codeType=account&url=www.htyou.com&backurl=tongye.html');
+				//console.log('http://www.htyou.com/user/user_login.action?jsoncallback=?&code=lyfx&userPassword=' + $('#password').val() + '&codeType=account&url=www.htyou.com&backurl=tongye.html');
 				$.getJSON('http://www.htyou.com/user/user_login.action?jsoncallback=?&code=lyfx&userPassword=' + $('#password').val() + '&codeType=account&url=www.htyou.com&backurl=tongye.html', function (result) {
 					if ( result.status=='120302' ){
 						//登陆成功的处理
@@ -156,7 +156,7 @@
 	</style>
 	<div id="footer">
 			<span onclick="javascript:addFavorite();">加入收藏</span>
-			大步旅行客服电话：<a href="tel:">xxxx-xxxxxxxx</a> &copy;版权所有 2016
+			大步旅行客服QQ：<a href="tel:">3094259501</a> &copy;版权所有 2016
 	</div>
 	<!--/页脚-->
 	<script>
