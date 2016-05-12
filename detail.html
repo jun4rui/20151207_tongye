@@ -292,21 +292,22 @@
 		font:14px/1.5 'Microsoft YaHei',Arial;
 	}
 	#tourlist .filter-panel {
-		font-size:16px;
+		font-size:14px;
 		border: 1px solid #AEA8A8;
 		background-color: #F0F0F0;
 	}
 	#tourlist .filter-unit {
-		padding:0 .5em;
+		padding: 0 .5em;
 		cursor: pointer;
-		color:#2588A3;
+		color: #2588A3;
+		margin: 0 .5em;
 	}
 	.filter-unit.active {
 		color:#FFF !important;
 		background-color:#F00;
 	}
 	.filter-unit:hover {
-		background:#FFFF00;
+		background-color:#FFFF00;
 		color:#2588A3 !important;
 	}
 	#memo {
@@ -378,9 +379,9 @@
 			<td>{{el.tourproid}}</td>
 			<td>{{el.tourproname}}</td>
 			<td>{{el.adultprice}}</td>
-			<td>{{el.colleagueprice}}</td>
-			<td>{{el.planqty}}</td>
-			<td>{{el.haveqty}}</td>
+			<td style="color:red">{{el.colleagueprice}}</td>
+			<td style="color:red">{{el.planqty}}</td>
+			<td style="color:red">{{el.haveqty}}</td>
 			<td>
 				<a ms-attr-href="http://www.htyou.com/common/FileDownload.action?jzluid={{el.jzluid}}&number=230002" target="_blank">
 					<img src="images/download_icon.png" alt="">
