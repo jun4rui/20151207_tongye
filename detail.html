@@ -258,7 +258,7 @@
 		</style>
 		<div class="data-panel" ms-repeat="list" ms-attr-keyword="{{el.value2.KeyWords}}">
 			<img src="images/icon_arrow.gif" alt="" class="up-arrow">
-			<a ms-attr-href="detail.html?itemid={{el.value2.KeyWords}}&lineid={{elem.lineid}}" ms-repeat-elem="el.value">{{elem.tourproname}}</a>
+			<a ms-attr-href="detail.html?itemid={{encodeURI(el.value2.KeyWords)}}&lineid={{elem.lineid}}" ms-repeat-elem="el.value">{{elem.tourproname}}</a>
 		</div>
 		<!--/菜单数据区-->
 	</div>
