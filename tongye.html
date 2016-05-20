@@ -90,6 +90,15 @@
 				list: []
 			});
 
+			//画廊VM
+			var galleryVM = avalon.define({
+				$id: 'gallery',
+				list:[],
+				galleryRendered: function(){
+					$('#gallery .bigpic-panel a').eq(0).click();
+				}
+			});
+
 			avalon.scan();
 
 			$.getJSON('http://www.htyou.com/common/websinfo_queryHTClass.action?datatype=json&classId=728&jsoncallback=?', function (result) {
@@ -105,6 +114,12 @@
 					});
 				}
 			});
+
+			//载入画廊数据
+			$.getJSON('http://www.htyou.com/common/adpic_queryAdPic.action?adPicType=220103&datatype=json&jsoncallback=?', function (result) {
+				galleryVM.list = result;
+			});
+
 		});
 	</script>
 </head>
@@ -242,23 +257,14 @@
 		background-color: #FF6600;
 	}
 </style>
-<div id="gallery">
+<div id="gallery" ms-controller="gallery">
 	<div class="bigpic-panel">
 		<a href="#">
-			<img src="http://www.htyou.com/pic/adpic/2015-12-02_15-31-45_0843.jpg" alt="">
+			<img src="" alt="">
 		</a>
 	</div>
 	<div class="topic-panel">
-		<div class="topic-unit gallery-unit active" pic="pic/adpic/2015-12-02_15-31-45_0843.jpg"
-			 link="/tour/type/month/keyword台湾_包机.htm"></div>
-		<div class="topic-unit gallery-unit" pic="pic/adpic/2015-12-14_09-12-11_8486.jpg"
-			 link="/tour/type/month/keyword长滩.htm"></div>
-		<div class="topic-unit gallery-unit" pic="pic/adpic/2015-11-26_09-25-35_9743.jpg"
-			 link="/tour/tourbrowse/10603.htm"></div>
-		<div class="topic-unit gallery-unit" pic="pic/adpic/2015-11-09_16-37-14_1746.jpg"
-			 link="/tour/tourbrowse/10466.htm"></div>
-		<div class="topic-unit gallery-unit" pic="pic/adpic/2015-05-05_10-11-08_2130.jpg"
-			 link="/tour/type/month/keyword韩国.htm"></div>
+		<div class="topic-unit gallery-unit" ms-attr-pic="{{unit.picuri}}" ms-attr-link="{{unit.alink}}" ms-repeat-unit="list" data-repeat-rendered="galleryRendered"></div>
 	</div>
 </div>
 <!--/上部可滚动Gallery-->
@@ -427,7 +433,7 @@
 
 		//Gallery点击切换函数
 		$('.topic-panel').delegate('.topic-unit', 'click', function () {
-			$('.bigpic-panel').html('<a href="http://www.htyou.com' + $(this).attr('link') + '" target="_blank"><img src="http://www.htyou.com/' + $(this).attr('pic') + '" alt=""/></a>');
+			$('.bigpic-panel').html('<a href="http://www.htyou.com/' + $(this).attr('link') + '" target="_blank"><img src="http://www.htyou.com/' + $(this).attr('pic') + '" alt=""/></a>');
 			$('.topic-unit.active').removeClass('active');
 			$(this).addClass('active');
 		});
