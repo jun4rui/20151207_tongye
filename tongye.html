@@ -433,7 +433,7 @@
 
 		//Galleryµã»÷ÇÐ»»º¯Êý
 		$('.topic-panel').delegate('.topic-unit', 'click', function () {
-			$('.bigpic-panel').html('<a href="http://www.htyou.com/' + $(this).attr('link') + '" target="_blank"><img src="http://www.htyou.com/' + $(this).attr('pic') + '" alt=""/></a>');
+			$('.bigpic-panel').html('<a href="'+$(this).attr('link') + '" target="_blank"><img src="http://www.htyou.com/' + $(this).attr('pic') + '" alt=""/></a>');
 			$('.topic-unit.active').removeClass('active');
 			$(this).addClass('active');
 		});
@@ -448,7 +448,7 @@
 			} else {
 				$('.topic-unit').eq(0).click();
 			}
-		}, 3000);
+		}, 10000);
 
 	});
 </script>
