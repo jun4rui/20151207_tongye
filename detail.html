@@ -344,7 +344,6 @@
 	<style>
 		#list-table {
 			font: 14px/30px 'Microsoft YaHei', Arial;
-			margin-top: 15px;
 			width: 100%;
 			border: 1px solid #E9E9E9;
 			border-spacing: 1px;
@@ -367,33 +366,40 @@
 		}
 
 	</style>
+	<script>
+		function toggleRow(rowNum){
+			$('#list-table tr th').eq(rowNum).toggle();
+			$('#list-table tr').find('td:eq(6)').toggle();
+		}
+	</script>
+	<div id="controller-button-panel" style="text-align: right;margin-top: 15px;">
+		<button onclick="toggleRow(6);">同行</button>
+	</div>
 	<table id="list-table">
 		<tr style="background:url(images/table_bg.gif) repeat-x;">
-			<th>状态</th>
-			<th>发团日期</th>
-			<th>截止日期</th>
-			<th>线路ID</th>
+			<th nowrap>状态</th>
+			<th nowrap>发团日期</th>
+			<th nowrap>截止日期</th>
+			<th nowrap>线路ID</th>
 			<th>线路名称</th>
-			<th>成人价格</th>
-
-			<th>同行价格</th>
-			<th>总人数</th>
-			<th>剩余人数</th>
-
-			<th>行程</th>
+			<th nowrap>成人价格</th>
+			<th nowrap>同行价格</th>
+			<th nowrap>总人数</th>
+			<th nowrap>剩余人数</th>
+			<th nowrap>行程</th>
 		</tr>
 		<tr ms-repeat="datelist" ms-if-loop="el.tourproname.indexOf(filterkey)>-1">
-			<td ms-if="el.status=='满员'" style="color:orange">{{el.status}}</td>
-			<td ms-if="el.status!='满员'" style="color:green">{{el.status}}</td>
-			<td>{{el.tourdate}}</td>
-			<td>{{el.aheadday}}</td>
-			<td>{{el.tourproid}}</td>
-			<td>{{el.tourproname}}</td>
-			<td style="color:red">{{el.adultprice}}</td>
-			<td style="color:red">{{el.colleagueprice}}</td>
-			<td>{{el.planqty}}</td>
-			<td style="color:red">{{el.haveqty}}</td>
-			<td>
+			<td nowrap ms-if="el.status=='满员'" style="color:orange">&nbsp;{{el.status}}&nbsp;</td>
+			<td nowrap ms-if="el.status!='满员'" style="color:green">&nbsp;{{el.status}}&nbsp;</td>
+			<td nowrap>&nbsp;{{el.tourdate}}&nbsp;</td>
+			<td nowrap>&nbsp;{{el.aheadday}}&nbsp;</td>
+			<td nowrap>&nbsp;{{el.tourproid}}&nbsp;</td>
+			<td style="text-align: left;">&nbsp;{{el.tourproname}}&nbsp;</td>
+			<td nowrap style="color:red">&nbsp;{{el.adultprice}}&nbsp;</td>
+			<td nowrap style="color:red">&nbsp;{{el.colleagueprice}}&nbsp;</td>
+			<td nowrap>&nbsp;{{el.planqty}}&nbsp;</td>
+			<td nowrap style="color:red">&nbsp;{{el.haveqty}}&nbsp;</td>
+			<td nowrap>
 				<a ms-attr-href="http://www.htyou.com/common/FileDownload.action?jzluid={{el.jzluid}}&number=230002" target="_blank">
 					<img src="images/download_icon.png" alt="">
 				</a>
