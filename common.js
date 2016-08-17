@@ -37,7 +37,7 @@ $(document).ready(function () {
 	if (window.location.href.indexOf('tongye.html')>-1 || window.location.href.indexOf('detail.html')>-1) {
 		$('body').append('' +
 			'<div id="help-panel" style="position:fixed; right:0; bottom:0; z-index:999;">' +
-			'<a href="http://wpa.qq.com/msgrd?v=3&uin=3094259501&site=qq&menu=yes" target="_blank"><img src="./images/help_qq.gif" alt="" style="width:124px; height:28px;"></a>' +
+			'<a href="http://wpa.qq.com/msgrd?v=3&uin=3094259501&site=qq&menu=yes" target="_blank"><img src="./images/help_qq.png" alt="" style="width:133px; height:37px;"></a>' +
 			'</div>'
 		);
 	}

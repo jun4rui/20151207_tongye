@@ -2,7 +2,7 @@
 <project version="4">
   <component name="WebServers">
     <option name="servers">
-      <webServer id="69035ed0-21eb-40b6-8355-72b76e9795eb" name="www.htyou.com" url="http://db.htyou.com/">
+      <webServer id="69035ed0-21eb-40b6-8355-72b76e9795eb" name="www.htyou.com (project level)" url="http://db.htyou.com/">
         <fileTransfer host="www.htyou.com" port="2222" rootFolder="/huatian/apache-tomcat-6.0.18-hebing/webapps/tongye" accessType="SFTP" password="dfccdfdedfdadfdfdfd9dfcfdfd8df9bdf98df99" username="userftp">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" />
